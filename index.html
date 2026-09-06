@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northeast Seattle Toastmasters</title>
+<meta name="description" content="Northeast Seattle Toastmasters, Club 1161 — a Toastmasters International club in Seattle, WA. Find your voice, find your confidence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,800;0,900;1,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Design tokens — now built from the official Toastmasters
+     International Brand Manual (v2.0):
+       Loyal Blue #004165 / Blissful Blue #006094 (primary, gradients)
+       True Maroon #772432 (primary)
+       Cool Gray #A9B2B1 / Fair Gray #F5F5F5 (secondary)
+       Happy Yellow #F2DF74 (accent — highlights only)
+       Black + white are brand-sanctioned for backgrounds/type too,
+       which is what lets this keep its dark, cinematic feel: the
+       background is black blended toward Loyal Blue, with the
+       official gradient colors doing the glow/surface work.
+     Fonts: Montserrat (free alternate for Gotham, headings) +
+     Source Sans 3 (free alternate for Myriad Pro, body).
+     ============================================================ */
+  :root {
+    --color-bg: #050f16;
+    --color-bg-alt: #0a1c26;
+    --color-surface: #0f2836;
+    --color-surface-hover: #143242;
+    --color-border: rgba(169, 178, 177, 0.22);
+    --color-text: #f5f5f5;
+    --color-text-dim: #b7c2c5;
+    --color-text-faint: #7c8a8f;
+    --color-accent: #f2df74;
+    --color-accent-rgb: 242, 223, 116;
+    --color-accent-dim: #cbb04f;
+    --color-maroon: #9a3349;
+    --color-maroon-strong: #772432;
+    --color-loyal-blue: #004165;
+    --color-blissful-blue: #006094;
+    --color-cta-text: #05141d;
+
+    --font-display: "Montserrat", "Gotham", -apple-system, sans-serif;
+    --font-body: "Source Sans 3", "Myriad Pro", -apple-system, sans-serif;
+
+    --max-width: 1180px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+    --radius: 6px;
+    --transition: 220ms ease;
+  }
+
+  /* This design commits to one visual world (a dark, cinematic look
+     built from the brand's own Loyal Blue gradient + black, which the
+     manual explicitly sanctions) rather than adapting to the viewer's
+     light/dark preference — background and text colors are set
+     explicitly so the page holds regardless of host theme. */
+
+  * , *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 0.5em; text-wrap: balance; }
+  p { margin: 0 0 1em; color: var(--color-text-dim); max-width: 62ch; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+  .eyebrow {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.75rem; font-weight: 600;
+  }
+  .accent-italic { color: var(--color-accent); }
+  .section { padding: clamp(3rem, 8vw, 6rem) 0; scroll-margin-top: 76px; }
+  .section--alt { background: var(--color-bg-alt); }
+  .section-head { max-width: 640px; margin-bottom: 2.5rem; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head.center p { margin-left: auto; margin-right: auto; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem;
+    border-radius: var(--radius); font-weight: 600; font-size: 0.95rem; border: 1px solid transparent;
+    cursor: pointer; transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn--primary { background: var(--color-accent); color: var(--color-cta-text); }
+  .btn--primary:hover { background: #dcb862; }
+  .btn--outline { background: transparent; color: var(--color-text); border-color: var(--color-border); }
+  .btn--outline:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .nav__cta .btn--outline { border-color: var(--color-accent); color: var(--color-accent); }
+  .nav__cta .btn--outline:hover { background: rgba(var(--color-accent-rgb), 0.1); }
+
+  .site-header {
+    position: sticky; top: 0; z-index: 100; background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; }
+  .nav__brand { display: flex; align-items: center; gap: 0.7rem; }
+  .nav__brand img { height: 38px; width: auto; display: block; }
+  .nav__brand .nav__brand-text { font-family: var(--font-display); font-size: 1.05rem; font-weight: 800; letter-spacing: 0.01em; display: flex; flex-direction: column; line-height: 1.1; }
+  .nav__brand small { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-faint); font-weight: 500; margin-top: 2px; }
+  .nav__links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+  .nav__links a { font-size: 0.9rem; font-weight: 500; color: var(--color-text-dim); transition: color var(--transition); position: relative; }
+  .nav__links a:hover, .nav__links a.is-active { color: var(--color-text); }
+  .nav__links a.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 2px; background: var(--color-accent); }
+  .nav__cta { display: flex; align-items: center; gap: 1.5rem; }
+  .nav__social { display: flex; align-items: center; gap: 1rem; }
+  .nav__social a { color: var(--color-text-dim); display: flex; transition: color var(--transition); }
+  .nav__social a:hover { color: var(--color-accent); }
+  .nav__social svg { width: 19px; height: 19px; }
+  .social-links { display: flex; align-items: center; gap: 1.1rem; }
+  .social-links a { color: var(--color-text-dim); display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; transition: color var(--transition); }
+  .social-links a:hover { color: var(--color-accent); }
+  .social-links svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .footer-grid .social-links { margin-top: 0.85rem; }
+  .cta-band .social-links { justify-content: center; margin-top: 1.5rem; }
+  .nav__toggle { display: none; background: none; border: none; color: var(--color-text); font-size: 1.5rem; cursor: pointer; padding: 0.25rem 0.5rem; }
+
+  @media (max-width: 860px) {
+    .nav__toggle { display: block; }
+    .nav__links {
+      position: absolute; top: 100%; left: 0; right: 0; background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border); flex-direction: column; align-items: flex-start;
+      gap: 0; padding: 0; max-height: 0; overflow: hidden; transition: max-height var(--transition);
+    }
+    .nav__links.is-open { max-height: 420px; }
+    .nav__links li { width: 100%; }
+    .nav__links a { display: block; width: 100%; padding: 1rem var(--gutter); border-bottom: 1px solid var(--color-border); }
+    .nav__cta .btn--outline { display: none; }
+    .nav__cta .nav__social { display: none; }
+  }
+
+  .hero { position: relative; padding: clamp(3.5rem, 10vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem); overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(var(--color-accent-rgb),0.10), transparent 55%),
+                radial-gradient(circle at 85% 0%, rgba(var(--color-accent-rgb),0.06), transparent 45%);
+    pointer-events: none;
+  }
+  .hero__content { position: relative; max-width: 760px; }
+
+  /* Spotlight beam: a literal cone of light falling from above onto the
+     headline, like a stage spotlight finding its speaker. The wedge is a
+     conic-gradient "sliced" to a narrow angle, softened by a blurred pool
+     of light where it lands on the text. */
+  .spotlight-beam {
+    position: absolute; top: -18%; left: -6%; width: 620px; height: 520px;
+    background: conic-gradient(from 145deg at 18% 0%,
+      transparent 0deg,
+      rgba(var(--color-accent-rgb), 0.16) 9deg,
+      rgba(var(--color-accent-rgb), 0.05) 17deg,
+      transparent 27deg);
+    filter: blur(2px);
+    z-index: 0; pointer-events: none;
+  }
+  .spotlight-pool {
+    position: absolute; top: 128px; left: 24px; width: 460px; height: 220px;
+    background: radial-gradient(ellipse at 30% 50%, rgba(var(--color-accent-rgb), 0.22), rgba(var(--color-accent-rgb), 0) 70%);
+    z-index: 0; pointer-events: none;
+  }
+  .hero h1 { position: relative; z-index: 1; font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 0.6em; text-align: center; }
+  .hero .eyebrow, .hero__lede, .hero__actions, .meeting-card { position: relative; z-index: 1; }
+  .hero__lede { font-size: 1.1rem; max-width: 560px; margin-left: auto; margin-right: auto; text-align: justify; }
+  @media (max-width: 600px) { .hero__lede { text-align: left; } }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; justify-content: center; }
+
+  .meeting-card {
+    position: relative; margin-top: 2.5rem; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; padding: 1.75rem; background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius); max-width: 912px; width: 120%; margin-left: -10%;
+  }
+  @media (max-width: 700px) { .meeting-card { width: 100%; margin-left: 0; } }
+  @media (max-width: 560px) { .meeting-card { grid-template-columns: 1fr; } }
+  .meeting-card__item { text-align: center; }
+  .meeting-card__item .label { display: block; text-align: center; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-faint); margin-bottom: 0.35rem; }
+  .meeting-card__item .value { display: block; text-align: center; font-family: var(--font-display); font-size: 1.05rem; color: var(--color-text); }
+
+  .card-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.75rem; transition: border-color var(--transition), background var(--transition); }
+  .card:hover { border-color: var(--color-accent); background: var(--color-surface-hover); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .card p { margin-bottom: 0; font-size: 0.92rem; }
+  .card-grid--centered .card { text-align: center; }
+
+  .officer-card { display: flex; flex-direction: column; gap: 1rem; }
+  .officer-avatar {
+    width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--color-blissful-blue), var(--color-loyal-blue));
+    display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: #f5f5f5; font-size: 1.05rem;
+    border: 1px solid rgba(242,223,116,0.35); overflow: hidden; flex-shrink: 0;
+  }
+  .officer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .officer-role { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); font-weight: 700; margin-bottom: 0.15rem; }
+
+  .award-year { display: block; font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); font-weight: 700; margin-bottom: 0.5rem; }
+
+  .meeting-card__cta { grid-column: 1 / -1; margin-top: 0.25rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border); text-align: center; }
+
+  .project-card__link { display: inline-block; margin-top: 0.6rem; color: var(--color-accent); font-size: 0.88rem; font-weight: 600; }
+  .project-card__link:hover { text-decoration: underline; }
+  .project-card p { color: var(--color-text-faint); margin-bottom: 0; }
+
+  .news-carousel-wrap { display: flex; align-items: center; gap: 0.9rem; margin-top: 2.25rem; }
+  .news-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 0.25rem 0.1rem 0.75rem; flex: 1; scrollbar-color: var(--color-border) transparent; }
+  .news-carousel::-webkit-scrollbar { height: 6px; }
+  .news-carousel::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+  .news-card { flex: 0 0 clamp(240px, 32vw, 300px); scroll-snap-align: start; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition); }
+  .news-card:hover { border-color: var(--color-accent); }
+  .news-card__media { position: relative; aspect-ratio: 4 / 3; background: linear-gradient(135deg, #16222b, #0a141b); display: flex; align-items: center; justify-content: center; }
+  .news-card__media .placeholder-icon { width: 36px; height: 36px; opacity: 0.35; }
+  .news-card__body { padding: 1.35rem; }
+  .news-card__body h3 { font-size: 1.02rem; margin-bottom: 0.4rem; }
+  .news-card__body p { font-size: 0.86rem; margin-bottom: 0; color: var(--color-text-dim); }
+  .news-carousel__nav { flex-shrink: 0; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--color-border); }
+  @media (min-width: 900px) { .grid--wide { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
+  .tile { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-bg-alt); display: block; isolation: isolate; }
+  .tile__media { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 500ms ease; }
+  .tile__media--placeholder { background: var(--tile-gradient, linear-gradient(135deg, #1e1e22, #0a0a0b)); display: flex; align-items: center; justify-content: center; }
+  .tile__media--placeholder .placeholder-icon { width: 42px; height: 42px; opacity: 0.35; }
+  .tile:hover .tile__media { transform: scale(1.06); }
+  .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.05) 100%); z-index: 1; }
+  .tile__glow {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(circle at 50% 42%, rgba(var(--color-accent-rgb), 0.32), rgba(var(--color-accent-rgb), 0) 62%);
+    opacity: 0; transition: opacity 400ms ease;
+  }
+  .tile:hover .tile__glow { opacity: 1; }
+  .tile__play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 50px; height: 50px; border-radius: 50%;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center;
+    z-index: 2; opacity: 0; transition: opacity var(--transition), transform var(--transition);
+  }
+  .tile:hover .tile__play { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .tile__play svg { width: 17px; height: 17px; fill: #fff; margin-left: 3px; }
+  .tile__caption { position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem; z-index: 2; }
+  .tile__caption .tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.3rem; font-weight: 700; }
+  .tile__caption h3 { font-size: 1.05rem; margin: 0 0 0.2rem; text-decoration: underline; text-decoration-color: var(--color-text-faint); text-underline-offset: 4px; }
+  .tile__caption p { font-size: 0.82rem; margin: 0; color: rgba(245,244,240,0.75); max-width: none; }
+  .placeholder-flag {
+    position: absolute; top: 0.9rem; right: 0.9rem; z-index: 2; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(255,255,255,0.1); border: 1px dashed rgba(255,255,255,0.35); color: var(--color-text-dim); padding: 0.22rem 0.5rem; border-radius: 3px;
+  }
+
+  .timeline { position: relative; margin-top: 2.25rem; padding-left: 2.25rem; border-left: 2px solid var(--color-border); }
+  .timeline__step { position: relative; padding-bottom: 2.5rem; }
+  .timeline__step:last-child { padding-bottom: 0; }
+  .timeline__step::before {
+    content: attr(data-step); position: absolute; left: -2.9rem; top: 0; width: 2.1rem; height: 2.1rem; border-radius: 50%;
+    background: var(--color-bg); border: 2px solid var(--color-accent); color: var(--color-accent); font-family: var(--font-display);
+    font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; justify-content: center;
+  }
+  .timeline__step h3 { margin-bottom: 0.35rem; }
+  .timeline__step .timeframe { display: inline-block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); margin-bottom: 0.45rem; }
+
+  .event-row { display: flex; gap: 1.5rem; align-items: flex-start; padding: 1.6rem 0; border-bottom: 1px solid var(--color-border); }
+  .event-row:first-child { padding-top: 0; }
+  .event-date { flex: 0 0 84px; text-align: center; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.7rem 0.5rem; }
+  .event-date .month { display: block; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); font-weight: 700; }
+  .event-date .day { display: block; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+  .event-body h3 { margin-bottom: 0.3rem; font-size: 1.1rem; }
+  .event-meta { font-size: 0.8rem; color: var(--color-text-faint); margin-bottom: 0.5rem; }
+
+  .calendar { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem clamp(1rem, 4vw, 1.75rem); margin-bottom: 2.5rem; }
+  .calendar__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; }
+  .calendar__header h3 { font-family: var(--font-display); font-size: 1.05rem; margin: 0; }
+  .calendar__nav { background: none; border: 1px solid var(--color-border); color: var(--color-text); width: 2.1rem; height: 2.1rem; border-radius: 50%; cursor: pointer; font-size: 1.15rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: border-color var(--transition), color var(--transition); }
+  @media (max-width: 700px) { .calendar__nav { width: 2.75rem; height: 2.75rem; font-size: 1.3rem; } }
+  .calendar__nav:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .calendar__weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-faint); margin-bottom: 0.5rem; }
+  .calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .calendar__day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 0.85rem; color: var(--color-text-dim); }
+  .calendar__day.is-empty { visibility: hidden; }
+  .calendar__day.is-meeting { background: rgba(var(--color-accent-rgb), 0.14); color: var(--color-text); font-weight: 600; border: 1px solid rgba(var(--color-accent-rgb), 0.4); }
+  .calendar__day.is-today { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+  .calendar__legend { margin-top: 1.1rem; font-size: 0.8rem; color: var(--color-text-faint); display: flex; align-items: center; gap: 0.55rem; }
+  .calendar__dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: rgba(var(--color-accent-rgb), 0.5); border: 1px solid rgba(var(--color-accent-rgb), 0.8); display: inline-block; flex-shrink: 0; }
+
+  .video-feature { max-width: 720px; margin: 0 auto 2.75rem; }
+  .video-feature__frame-wrap { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); background: var(--color-bg-alt); }
+  .video-feature__frame-wrap img, .video-feature__frame-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+  .video-feature__thumb { position: absolute; inset: 0; display: block; cursor: pointer; }
+  .video-feature__thumb::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0) 55%); }
+  .video-feature__play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform 300ms ease; z-index: 1; }
+  .video-feature__thumb:hover .video-feature__play { transform: scale(1.08); }
+  .video-feature__play svg { width: 64px; height: 64px; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5)); }
+  .video-feature__caption { text-align: center; font-size: 0.85rem; color: var(--color-text-faint); margin-top: 0.9rem; }
+  .video-feature__caption a { color: var(--color-text-dim); }
+  .video-feature__caption a:hover { color: var(--color-accent); }
+
+  .cta-band { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); text-align: center; padding: clamp(2.75rem, 7vw, 4.5rem) 0; }
+  .cta-band h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); margin-bottom: 0.5rem; }
+  .cta-band p { max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-band .btn { margin-top: 1.1rem; }
+
+  .site-footer { padding: 2.75rem 0 2rem; background: var(--color-bg); border-top: 1px solid var(--color-border); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; margin-bottom: 2.25rem; }
+  @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-grid h4 { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-faint); margin-bottom: 0.9rem; }
+  .footer-grid ul { list-style: none; margin: 0; padding: 0; }
+  .footer-grid li { margin-bottom: 0.55rem; }
+  .footer-grid a { color: var(--color-text-dim); font-size: 0.88rem; }
+  .footer-grid a:hover { color: var(--color-accent); }
+  .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: var(--color-text-faint); padding-top: 1.4rem; border-top: 1px solid var(--color-border); }
+
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="#home" class="nav__brand">
+      <img src="assets/img/brand/toastmasters-logo.png" alt="Toastmasters International" width="480" height="398">
+      <span class="nav__brand-text">
+        NE Seattle Toastmasters
+        <small>Club 1161 &middot; Est. 1952</small>
+      </span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#home" data-nav>Home</a></li>
+        <li><a href="#innovation" data-nav>Innovation</a></li>
+        <li><a href="#about" data-nav>About &amp; Officers</a></li>
+        <li><a href="#spotlights" data-nav>Spotlights</a></li>
+        <li><a href="#events" data-nav>Events</a></li>
+        <li><a href="#getting-started" data-nav>Getting Started</a></li>
+      </ul>
+    </nav>
+    <div class="nav__cta">
+      <span class="nav__social"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg></a></span>
+      <a href="#getting-started" class="btn btn--outline">Visit as a Guest</a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================= HOME ============================= -->
+  <section class="hero" id="home">
+    <div class="container hero__content">
+      <div class="spotlight-beam" aria-hidden="true"></div>
+      <div class="spotlight-pool" aria-hidden="true"></div>
+      <h1>Find Your <span class="accent-italic">Voice.</span></h1>
+      <p class="hero__lede">
+        We are a diverse, innovative, long-running Toastmasters club where members practice
+        public speaking and leadership skills in a low-pressure, supportive environment.
+        Every meeting mixes prepared speeches, impromptu practice, and supportive feedback.
+        Guests are welcome to join us and participate every single week.
+      </p>
+      <div class="hero__actions">
+        <a href="#getting-started" class="btn btn--primary">Schedule Your Visit</a>
+        <a href="#spotlights" class="btn btn--outline">See Our Members in Action</a>
+      </div>
+      <div class="meeting-card">
+        <div class="meeting-card__item"><span class="label">Day &amp; Time</span><span class="value">Mondays, 7:30&ndash;9:00 PM</span></div>
+        <div class="meeting-card__item"><span class="label">Format</span><span class="value">Hybrid - In-Person and Online</span></div>
+        <div class="meeting-card__item"><span class="label">Location</span><span class="value">The Fairview Church, Rm&nbsp;311<br>844 NE 78th St, Seattle, WA&nbsp;98115</span></div>
+        <div class="meeting-card__cta"><a href="https://meet.google.com/tef-kmyi-xxb" target="_blank" rel="noopener" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Virtual Meeting Link</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Why members join and <em>stay</em></span>
+        <h2>A club built for getting vulnerable, scrappy, and unstoppable&hellip;on your terms.</h2>
+      </div>
+
+      <div class="video-feature">
+        <div class="video-feature__frame-wrap" id="clubVideoWrap">
+          <a class="video-feature__thumb" href="https://youtu.be/elIVOUwcD-Y?si=ftdahl7k2SqJkHtP" target="_blank" rel="noopener" aria-label="Play club video" data-video-id="elIVOUwcD-Y" id="clubVideoThumb">
+            <img src="https://img.youtube.com/vi/elIVOUwcD-Y/hqdefault.jpg" alt="Club video preview" loading="lazy">
+            <span class="video-feature__play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(5,20,29,0.72)" stroke="#f2df74" stroke-width="1.4"/><path d="M10 8.1v7.8l6.5-3.9z" fill="#f2df74"/></svg></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="card-grid card-grid--centered">
+        <div class="card"><h3>Speaking opportunities large and small available weekly</h3><p>Structured speaking roles for every skill level, from your first Ice Breaker to competition-ready contest speeches.</p></div>
+        <div class="card"><h3>Supportive, actionable feedback</h3><p>Every speaker gets specific, actionable evaluations &mdash; the fastest way we know to actually improve.</p></div>
+        <div class="card"><h3>Expand as a leader</h3><p>Contribute to our success through running a meeting, managing a project, or serving as a club officer. We can't think of a better way to hone the very skills that deliver personally and professionally.</p></div>
+        <div class="card"><h3>Fun vibes</h3><p>Our club doesn't ask you to fit a mold. We ask only that you show up and grow in whatever way is authentic to you. What we do not embrace: rigid outdated frameworks, policies which inhibit member growth, and cultures mistaking familiarity for value.</p></div>
+        <div class="card"><h3>We welcome your projects</h3><p>Our Members routinely share what they are working on with our club. Whether it's work projects, side projects, or a new venture, our stage is open. See examples further down the page.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= INNOVATION ============================= -->
+  <section class="section" id="innovation">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Innovation</span>
+        <h2>We break the mold and try new stuff</h2>
+        <p style="text-wrap: balance;">Our club is committed to pushing past outdated, garden-variety formats. Instead, we experiment with innovative meeting formats and topics and extracurricular activities that challenge us and create camaraderie.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card"><h3>Stage Nights</h3><p>A dedicated evening for members to perform prepared material in front of a live crowd outside the structure of a normal meeting &mdash; the first of several new stage formats in the works.</p></div>
+        <div class="card"><h3>Social Events</h3><p>Regular get-togethers outside the meeting room, built to turn fellow members into real friends and keep the club feeling like a community, not just an hour on Monday nights.</p></div>
+        <div class="card"><h3>Extracurricular Opportunities</h3><p>From speaking at Ignite Seattle to other community stages we're actively pursuing, our innovation initiatives help members take their voice beyond the club &mdash; with more opportunities on the way.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================= MEMBER PROJECTS ============================= -->
+  <section class="section section--alt" id="member-projects">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Member Projects</span>
+        <h2>Northeast Seattle Toastmasters Supports Entrepreneurs, Personal Projects, and Work Projects!</h2>
+        <p>Our people are builders with real projects, sharing their successes and failures with our community. See examples of what shows up in our incubator.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card project-card"><h3>Shame Club&trade;</h3><p>By Bobby F.</p><a class="project-card__link" href="https://www.shameclub.net/" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
+        <div class="card project-card"><h3>YouTube Channel</h3><p>By Stela Z.</p><a class="project-card__link" href="https://www.youtube.com/@stelazhou" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
+        <div class="card project-card"><h3>Transformational Ties&trade;</h3><p>By London E.</p><a class="project-card__link" href="https://www.transformational-ties.com/" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
+        <div class="card project-card"><h3>UnshakableMe&reg;</h3><p>By Heidi B.</p><a class="project-card__link" href="https://www.unshakableme.com/" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <h2>Your first meeting is free, no speaking required.</h2>
+      <p>Experience what a truly innovative and welcoming meeting feels like. No pressure, no pitch.</p>
+      <a href="#getting-started" class="btn btn--primary">Plan Your Visit</a>
+    </div>
+  </section>
+
+  <!-- ============================= ABOUT ============================= -->
+  <section class="section section--alt" id="about">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">About the Club</span>
+        <h2>The old playbook died with the dinosaurs&hellip;so we wrote our own!</h2>
+        <p>Northeast Seattle Toastmasters, Club 1161, was chartered in 1952 &mdash; but
+        the club that meets today is diverse, innovative, and dynamic, and it's
+        grown into one of the largest and fastest-growing clubs on the West Coast.
+        What hasn't changed is the community: since 1952 we've helped hundreds of
+        members &mdash; students, engineers, executives, career-changers, retirees,
+        entrepreneurs, authors, and other creators &mdash; get more comfortable and
+        more capable in front of a room, and build real relationships along the way.</p>
+      </div>
+      <div class="card-grid" style="margin-bottom: 3rem;">
+        <div class="card"><h3>Our Mission</h3><p>We provide a supportive, positive environment built around your individual goals and projects &mdash; not a one-size-fits-all curriculum &mdash; so every member can develop communication and leadership skills that fit their own path to self-confidence and growth.</p></div>
+        <div class="card"><h3>Community &amp; Relationships</h3><p>Members come from every background and career stage &mdash; preparing for a big presentation, working toward a leadership title, or just wanting to think faster on their feet. The friendships and support built along the way are a big part of why people stay.</p></div>
+        <div class="card"><h3>Growing Fast</h3><p>We're proud to be one of the largest, and by far the fastest-growing, clubs on the West Coast &mdash; a lively, ever-evolving mix of members, backgrounds, and meeting formats.</p></div>
+      </div>
+
+      <div class="section-head">
+        <span class="eyebrow">Leadership</span>
+        <h2>Meet Your <span class="accent-italic">Officers</span></h2>
+      </div>
+      <div class="card-grid">
+        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">President</div><h3>Catherine E.</h3><p>Putting Members at the center of what we do, setting the vision, and leading the club's transformation for the 2026&ndash;2027 term.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Education</div><h3>Lisa H.</h3><p>Tailoring the club's education program and Pathways tracks to each Member.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Membership</div><h3>Heidi H.</h3><p>Welcoming new members and guests to Club 1161.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/vp-public-relations.jpg" alt="VP Public Relations headshot"></div><div><div class="officer-role">VP Public Relations</div><h3>London E.</h3><p>Leading the club's 2026&ndash;2027 branding, marketing, and online presence.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/vp-innovation.jpg" alt="VP Innovation headshot"></div><div><div class="officer-role">VP Innovation</div><h3>Bobby F.</h3><p>Leading ways to expand our members' growth and camaraderie, both at regular meetings and beyond.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Operations</div><h3>Rick R.</h3><p>Keeping weekly meetings running smoothly.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">Treasurer</div><h3>Dallas H.</h3><p>Managing the club's dues and budget.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= AWARDS ============================= -->
+  <section class="section" id="awards">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Awards</span>
+        <h2>Recent Club Achievements</h2>
+      </div>
+      <div class="card-grid">
+        <div class="card"><span class="award-year">2026&ndash;2027</span><h3>Distinguished</h3><p>5 of 10 DCP goals met &mdash; and just getting started!</p></div>
+        <div class="card"><span class="award-year">2025&ndash;2026</span><h3>Smedley Distinguished</h3><p>10 of 10 DCP goals met</p></div>
+        <div class="card"><span class="award-year">2024&ndash;2025</span><h3>President's Distinguished</h3><p>10 of 10 DCP goals met</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= SPOTLIGHTS (home) ========================= -->
+  <section class="section" id="spotlights">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">From the club</span>
+        <h2>Member <span class="accent-italic">Spotlights</span> &amp; Highlights</h2>
+        <p>A running record of speeches, milestones, and meetings worth remembering.</p>
+      </div>
+    </div>
+    <div class="grid grid--wide">
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stela-n.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Member Spotlight</span><h3>Stela N.</h3><p>One of Club 1161's members &mdash; more of her story coming soon.</p></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-4.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Meeting Highlight</span><h3>Table Topics Night</h3><p>An impromptu question, put to a member on the spot.</p></span></a>
+      <a class="tile" href="#events">
+        <span class="placeholder-flag">Photo needed</span>
+        <span class="tile__media tile__media--placeholder" style="--tile-gradient: linear-gradient(135deg,#221c24,#0a0a0b);">
+          <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+        </span>
+        <span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="tile__caption"><span class="tag">Upcoming</span><h3>Speech Contest Season</h3><p>Placeholder &mdash; add contest date once confirmed.</p></span>
+      </a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-1.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>A Prepared Bit on Stage Night</h3><p>Members step outside the normal meeting format to perform prepared material in front of a live crowd.</p></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-2.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Hosting a Recent Stage Night</h3><p>A dedicated evening for members to take the mic outside the structure of a normal Monday meeting.</p></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-3.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Taking a Turn on Stage Night</h3><p>Another member steps up to share prepared remarks during a themed Stage Night.</p></span></a>
+    </div>
+  </section>
+
+  <!-- ============================= CLUB NEWS ============================= -->
+  <section class="section section--alt" id="club-news">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Club News</span>
+        <h2>What's Happening at Club 1161</h2>
+        <p>Wins, announcements, and updates from around the club &mdash; swipe through for the latest.</p>
+      </div>
+      <div class="news-carousel-wrap">
+        <button type="button" class="calendar__nav news-carousel__nav" id="newsPrev" aria-label="Previous news item">&#8249;</button>
+        <div class="news-carousel" id="newsCarousel">
+<article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/five-goals.png);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Club Achievement</span><h3>Distinguished Club Status Achieved</h3><p>Club 1161 earned Distinguished Status for the 2026 - 2027 year on 31 August, a new club history record! Our membership has also climbed to a very respectable 34 creators.</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/group-photo-full.jpg);background-size:contain;background-repeat:no-repeat;background-position:center;background-color:var(--color-surface);"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Officers</span><h3>2026 - 2027 Officers Sworn In</h3><p>On 1 July 2026, a new era of growth and innovation officially arrived!</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/two-people.jpg);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Member Moment</span><h3>Celebrating Our Success at the Annual Club Picnic</h3><p>Catherine and Dallas (left to right) talking about sports at the annual Club Picnic.</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/smedley-award.png);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Club Achievement</span><h3>Smedley Distinguished &mdash; 10 of 10 Goals Met</h3><p>Club 1161 earned Smedley Distinguished recognition for the 2025 - 2026 program year, meeting every one of Toastmasters International&rsquo;s ten club goals.</p></div></article>        </div>
+        <button type="button" class="calendar__nav news-carousel__nav" id="newsNext" aria-label="Next news item">&#8250;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= EVENTS ============================= -->
+  <section class="section section--alt" id="events">
+    <div class="container" style="max-width: 820px;">
+      <div class="section-head">
+        <span class="eyebrow">What's Coming Up</span>
+        <h2>Meetings, contests, and <span class="accent-italic">member socials</span>.</h2>
+        <p>We meet every Monday, and a few times a year we run something bigger &mdash; a speech contest, a member-only social, or a themed meeting worth inviting a friend to.</p>
+      </div>
+
+      <div class="calendar" id="clubCalendar">
+        <div class="calendar__header">
+          <button type="button" class="calendar__nav" id="calPrev" aria-label="Previous month">&#8249;</button>
+          <h3 id="calLabel"></h3>
+          <button type="button" class="calendar__nav" id="calNext" aria-label="Next month">&#8250;</button>
+        </div>
+        <div class="calendar__weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+        <div class="calendar__grid" id="calGrid"></div>
+        <div class="calendar__legend"><span class="calendar__dot"></span> Weekly club meeting, every Monday &mdash; social and contest dates are announced separately below once confirmed.</div>
+      </div>
+
+      <div class="event-row">
+        <div class="event-date"><span class="month">Every</span><span class="day">MON</span></div>
+        <div class="event-body"><h3>Weekly Club Meeting</h3><div class="event-meta">7:30&ndash;9:00 PM &middot; The Fairview Church, Rm 311 &middot; Hybrid - In-Person and Online</div><p>Prepared speeches, table topics, and evaluations. Guests welcome every week, no RSVP required.</p></div>
+
+      </div>
+      <div class="event-row">
+        <div class="event-date"><span class="month">TBD</span><span class="day">&mdash;</span></div>
+        <div class="event-body"><h3>Member Social</h3><div class="event-meta">Date to be announced</div><p>Placeholder &mdash; a member-only social night, part of our Innovation program's regular get-togethers.</p></div>
+      </div>
+      <div class="event-row">
+        <div class="event-date"><span class="month">TBD</span><span class="day">&mdash;</span></div>
+        <div class="event-body"><h3>Club Speech Contest</h3><div class="event-meta">Date to be set with the VP Education</div><p>Placeholder &mdash; our club-level contest, the first step toward Area and Division competition.</p></div>
+      </div>
+
+      <div class="card-grid" style="margin-top: 2.5rem;">
+        <div class="card"><h3>Media Kit</h3><p>Our VP of Public Relations will release our Media Kit sometime early Fall 2026.</p></div>
+        <div class="card"><h3>Press Contact</h3><p>Reach the VP of Public Relations: <a href="mailto:vp-pr@neseattletoastmasters.org" style="color:var(--color-accent);">vp-pr@neseattletoastmasters.org</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= GETTING STARTED ============================= -->
+  <section class="section" id="getting-started">
+    <div class="container" style="max-width: 720px;">
+      <div class="section-head">
+        <span class="eyebrow">For New Guests &amp; Members</span>
+        <h2>Find Your <span class="accent-italic">Confidence.</span></h2>
+        <p>Every member moves at their own pace &mdash; this is the typical rapid track, not a requirement.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline__step" data-step="1"><span class="timeframe">Before you arrive</span><h3>Check the details, then just show up</h3><p>Mondays, 7:30&ndash;9:00 PM, at The Fairview Church (Rm 311), 844 NE 78th St, Seattle, WA&nbsp;98115 &mdash; in person or by Google Meet. No sign-up, no cost.</p><p><a href="https://drive.google.com/file/d/1IECu5JLL-SxcyfAytlY_2LH_gqBNtPSP/view" target="_blank" rel="noopener" style="color:var(--color-accent);">Meeting Roles &amp; What to Expect (guide) &rarr;</a></p></div>
+        <div class="timeline__step" data-step="2"><span class="timeframe">Your first meeting</span><h3>Sit in and see the format</h3><p>A member greets you at the door and explains the meeting roles. You're welcome to just observe.</p></div>
+        <div class="timeline__step" data-step="3"><span class="timeframe">When you're ready</span><h3>Become an official member</h3><p>Download and complete the <a href="https://content.toastmasters.org/image/upload/800-membership-application-ff.pdf" target="_blank" rel="noopener" style="color:var(--color-accent);">New Member Application</a>, then email it with your dues to <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" style="color:var(--color-accent);">our officers</a>.</p></div>
+        <div class="timeline__step" data-step="4"><span class="timeframe">Weeks 1&ndash;2</span><h3>Get a mentor and pick a Pathway</h3><p>New members are paired with a mentor and choose a Pathways learning track based on their goals.</p></div>
+        <div class="timeline__step" data-step="5"><span class="timeframe">Weeks 3&ndash;6</span><h3>Give your Ice Breaker speech</h3><p>Your first prepared speech introduces you to the club &mdash; short, and supportive.</p></div>
+        <div class="timeline__step" data-step="6"><span class="timeframe">Months 2&ndash;6</span><h3>Build momentum</h3><p>Take on a meeting role, give 2&ndash;3 more speeches, and get comfortable with structured feedback.</p><p><a href="#spotlights" style="color:var(--color-accent);">See Member Spotlights &rarr;</a></p></div>
+        <div class="timeline__step" data-step="7"><span class="timeframe">6+ months</span><h3>Step into leadership</h3><p>Run for a club officer role, mentor the next new guest, or compete at an Area speech contest.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <h2>See you Monday at 7:30!</h2>
+      <p>The Fairview Church, Room 311 &mdash; 844 NE 78th St, Seattle, WA&nbsp;98115. In person or on Zoom.</p>
+      <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" class="btn btn--primary">RSVP Now</a>
+      <div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Follow @neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>Watch on YouTube</span></a></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h4>Northeast Seattle Toastmasters</h4><p style="max-width:320px;">Club 1161, chartered 1952. Part of Toastmasters International, District&nbsp;2, Area&nbsp;B26.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#innovation">Innovation</a></li><li><a href="#member-projects">Member Projects</a></li><li><a href="#about">About &amp; Officers</a></li><li><a href="#awards">Awards</a></li><li><a href="#spotlights">Spotlights</a></li><li><a href="#club-news">Club News</a></li><li><a href="#events">Events</a></li><li><a href="#getting-started">Getting Started</a></li></ul></div>
+      <div><h4>Connect</h4><ul><li><a href="https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club" target="_blank" rel="noopener">Toastmasters Find-a-Club</a></li><li><a href="mailto:vp-pr@neseattletoastmasters.org">Email the Club</a></li></ul><div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>@neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>YouTube</span></a></div></div>
+    </div>
+    <div class="footer-bottom" style="flex-direction: column; align-items: flex-start; gap: 0.6rem;">
+      <p style="max-width: 640px; font-size: 0.78rem; color: var(--color-text-faint); margin: 0;">The information on this website is for the sole use of Toastmasters&rsquo; members, for Toastmasters business only. It is not to be used for solicitation and distribution of non-Toastmasters material or information.</p>
+      <div style="display:flex; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 1rem;">
+        <span>&copy; 2026 Northeast Seattle Toastmasters, Club 1161.</span>
+        <span>Toastmasters&reg; is a registered trademark of Toastmasters International.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var isOpen = links.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { links.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); });
+    });
+  }
+
+  // Drive every in-page "#section" link with JS scrolling instead of relying
+  // on native browser anchor-jump/hash navigation, which some embedded
+  // preview panels intercept or block. This makes the header nav (and every
+  // other same-page CTA) work regardless of how the page is hosted.
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var id = link.getAttribute('href').slice(1);
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    var headerOffset = 76;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  });
+
+  // Highlight the current section in the nav on scroll
+  var sections = ['home','innovation','about','spotlights','events','getting-started'].map(function(id){ return document.getElementById(id); });
+  var navAnchors = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  function onScroll() {
+    var pos = window.scrollY + 100;
+    var current = sections[0];
+    sections.forEach(function (sec) { if (sec && sec.offsetTop <= pos) current = sec; });
+    navAnchors.forEach(function (a) {
+      a.classList.toggle('is-active', current && a.getAttribute('href') === '#' + current.id);
+    });
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Club calendar (Events section): a real, navigable month view highlighting
+  // the recurring Monday meeting. Specific one-off event dates (open house,
+  // contest) aren't confirmed yet, so only the weekly meeting is marked.
+  (function () {
+    var calGrid = document.getElementById('calGrid');
+    var calLabel = document.getElementById('calLabel');
+    var calPrev = document.getElementById('calPrev');
+    var calNext = document.getElementById('calNext');
+    if (!calGrid || !calLabel || !calPrev || !calNext) return;
+    var today = new Date();
+    var viewYear = today.getFullYear();
+    var viewMonth = today.getMonth();
+    var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    function render() {
+      calGrid.innerHTML = '';
+      calLabel.textContent = monthNames[viewMonth] + ' ' + viewYear;
+      var firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      for (var i = 0; i < firstDay; i++) {
+        var empty = document.createElement('span');
+        empty.className = 'calendar__day is-empty';
+        calGrid.appendChild(empty);
+      }
+      for (var d = 1; d <= daysInMonth; d++) {
+        var cell = document.createElement('span');
+        var dow = new Date(viewYear, viewMonth, d).getDay();
+        var classes = ['calendar__day'];
+        if (dow === 1) classes.push('is-meeting');
+        if (viewYear === today.getFullYear() && viewMonth === today.getMonth() && d === today.getDate()) classes.push('is-today');
+        cell.className = classes.join(' ');
+        cell.textContent = d;
+        calGrid.appendChild(cell);
+      }
+    }
+
+    calPrev.addEventListener('click', function () {
+      viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      render();
+    });
+    calNext.addEventListener('click', function () {
+      viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      render();
+    });
+    render();
+  })();
+
+  // Club video feature (Why Members Join and Stay section): click-to-play
+  // thumbnail so the YouTube iframe only loads once someone actually wants it.
+  (function () {
+    var thumb = document.getElementById('clubVideoThumb');
+    var wrap = document.getElementById('clubVideoWrap');
+    if (!thumb || !wrap) return;
+    thumb.addEventListener('click', function (e) {
+      e.preventDefault();
+      var videoId = thumb.getAttribute('data-video-id');
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+      iframe.setAttribute('title', 'Club video');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      wrap.innerHTML = '';
+      wrap.appendChild(iframe);
+    });
+  })();
+
+  // Club News carousel: simple prev/next buttons that scroll the card row.
+  (function () {
+    var track = document.getElementById('newsCarousel');
+    var prev = document.getElementById('newsPrev');
+    var next = document.getElementById('newsNext');
+    if (!track || !prev || !next) return;
+    function scrollByCard(dir) {
+      var card = track.querySelector('.news-card');
+      var amount = card ? card.getBoundingClientRect().width + 20 : 300;
+      track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+    }
+    prev.addEventListener('click', function () { scrollByCard(-1); });
+    next.addEventListener('click', function () { scrollByCard(1); });
+  })();
+</script>
+</body>
+</html>
