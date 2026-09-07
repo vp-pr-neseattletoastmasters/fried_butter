@@ -3,8 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Security hardening: GitHub Pages serves static files only and can't send
+     custom HTTP response headers, so a real X-Frame-Options / HSTS / a
+     header-delivered CSP aren't available here. A CSP meta tag is the
+     strongest lever a static host like this allows (it can't cover
+     frame-ancestors, which needs the real header) — restricts every
+     resource type to the specific origins this page actually uses. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://img.youtube.com; frame-src https://www.youtube-nocookie.com; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Northeast Seattle Toastmasters</title>
 <meta name="description" content="Northeast Seattle Toastmasters, Club 1161 — a Toastmasters International club in Seattle, WA. Find your voice, find your confidence.">
+<link rel="icon" type="image/png" href="assets/img/brand/toastmasters-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,800;0,900;1,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -162,11 +171,6 @@
     filter: blur(2px);
     z-index: 0; pointer-events: none;
   }
-  .spotlight-pool {
-    position: absolute; top: 128px; left: 24px; width: 460px; height: 220px;
-    background: radial-gradient(ellipse at 30% 50%, rgba(var(--color-accent-rgb), 0.22), rgba(var(--color-accent-rgb), 0) 70%);
-    z-index: 0; pointer-events: none;
-  }
   .hero h1 { position: relative; z-index: 1; font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 0.6em; text-align: center; }
   .hero .eyebrow, .hero__lede, .hero__actions, .meeting-card { position: relative; z-index: 1; }
   .hero__lede { font-size: 1.1rem; max-width: 560px; margin-left: auto; margin-right: auto; text-align: justify; }
@@ -237,17 +241,9 @@
     opacity: 0; transition: opacity 400ms ease;
   }
   .tile:hover .tile__glow { opacity: 1; }
-  .tile__play {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 50px; height: 50px; border-radius: 50%;
-    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center;
-    z-index: 2; opacity: 0; transition: opacity var(--transition), transform var(--transition);
-  }
-  .tile:hover .tile__play { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  .tile__play svg { width: 17px; height: 17px; fill: #fff; margin-left: 3px; }
   .tile__caption { position: absolute; left: 1.1rem; right: 1.1rem; bottom: 1rem; z-index: 2; }
   .tile__caption .tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.3rem; font-weight: 700; }
-  .tile__caption h3 { font-size: 1.05rem; margin: 0 0 0.2rem; text-decoration: underline; text-decoration-color: var(--color-text-faint); text-underline-offset: 4px; }
-  .tile__caption p { font-size: 0.82rem; margin: 0; color: rgba(245,244,240,0.75); max-width: none; }
+  .tile__caption h3 { font-size: 1.05rem; margin: 0; text-decoration: underline; text-decoration-color: var(--color-text-faint); text-underline-offset: 4px; }
   .placeholder-flag {
     position: absolute; top: 0.9rem; right: 0.9rem; z-index: 2; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
     background: rgba(255,255,255,0.1); border: 1px dashed rgba(255,255,255,0.35); color: var(--color-text-dim); padding: 0.22rem 0.5rem; border-radius: 3px;
@@ -284,6 +280,13 @@
   .calendar__day.is-empty { visibility: hidden; }
   .calendar__day.is-meeting { background: rgba(var(--color-accent-rgb), 0.14); color: var(--color-text); font-weight: 600; border: 1px solid rgba(var(--color-accent-rgb), 0.4); }
   .calendar__day.is-today { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+  .calendar__day.has-note { flex-direction: column; justify-content: center; gap: 0.1rem; line-height: 1; }
+  .calendar__day .day-num { font-size: 0.8rem; }
+  .calendar__day .day-note { font-size: 0.42rem; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 700; }
+  .calendar__day.is-inperson .day-note { color: var(--color-accent); }
+  .calendar__day.is-cancelled { background: rgba(119,36,50,0.25); border: 1px solid rgba(119,36,50,0.6); }
+  .calendar__day.is-cancelled .day-num { text-decoration: line-through; color: var(--color-text-faint); font-weight: 600; }
+  .calendar__day.is-cancelled .day-note { color: #d99aa3; }
   .calendar__legend { margin-top: 1.1rem; font-size: 0.8rem; color: var(--color-text-faint); display: flex; align-items: center; gap: 0.55rem; }
   .calendar__dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: rgba(var(--color-accent-rgb), 0.5); border: 1px solid rgba(var(--color-accent-rgb), 0.8); display: inline-block; flex-shrink: 0; }
 
@@ -314,6 +317,12 @@
   .footer-grid a:hover { color: var(--color-accent); }
   .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: var(--color-text-faint); padding-top: 1.4rem; border-top: 1px solid var(--color-border); }
 
+  .live-banner {
+    background: var(--color-accent); color: var(--color-cta-text); text-align: center;
+    font-size: 0.82rem; font-weight: 600; padding: 0.55rem var(--gutter);
+  }
+  .live-banner strong { text-decoration: underline; }
+
   .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 </style>
 </head>
@@ -339,7 +348,7 @@
       </ul>
     </nav>
     <div class="nav__cta">
-      <span class="nav__social"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg></a></span>
+      <span class="nav__social"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg></a></span>
       <a href="#getting-started" class="btn btn--outline">Visit as a Guest</a>
       <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">&#9776;</button>
     </div>
@@ -352,7 +361,6 @@
   <section class="hero" id="home">
     <div class="container hero__content">
       <div class="spotlight-beam" aria-hidden="true"></div>
-      <div class="spotlight-pool" aria-hidden="true"></div>
       <h1>Find Your <span class="accent-italic">Voice.</span></h1>
       <p class="hero__lede">
         We are a diverse, innovative, long-running Toastmasters club where members practice
@@ -368,7 +376,7 @@
         <div class="meeting-card__item"><span class="label">Day &amp; Time</span><span class="value">Mondays, 7:30&ndash;9:00 PM</span></div>
         <div class="meeting-card__item"><span class="label">Format</span><span class="value">Hybrid - In-Person and Online</span></div>
         <div class="meeting-card__item"><span class="label">Location</span><span class="value">The Fairview Church, Rm&nbsp;311<br>844 NE 78th St, Seattle, WA&nbsp;98115</span></div>
-        <div class="meeting-card__cta"><a href="https://meet.google.com/tef-kmyi-xxb" target="_blank" rel="noopener" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Virtual Meeting Link</a></div>
+        <div class="meeting-card__cta"><a href="https://meet.google.com/tef-kmyi-xxb" target="_blank" rel="noopener noreferrer" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Virtual Meeting Link</a></div>
       </div>
     </div>
   </section>
@@ -382,7 +390,7 @@
 
       <div class="video-feature">
         <div class="video-feature__frame-wrap" id="clubVideoWrap">
-          <a class="video-feature__thumb" href="https://youtu.be/elIVOUwcD-Y?si=ftdahl7k2SqJkHtP" target="_blank" rel="noopener" aria-label="Play club video" data-video-id="elIVOUwcD-Y" id="clubVideoThumb">
+          <a class="video-feature__thumb" href="https://youtu.be/elIVOUwcD-Y?si=ftdahl7k2SqJkHtP" target="_blank" rel="noopener noreferrer" aria-label="Play club video" data-video-id="elIVOUwcD-Y" id="clubVideoThumb">
             <img src="https://img.youtube.com/vi/elIVOUwcD-Y/hqdefault.jpg" alt="Club video preview" loading="lazy">
             <span class="video-feature__play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(5,20,29,0.72)" stroke="#f2df74" stroke-width="1.4"/><path d="M10 8.1v7.8l6.5-3.9z" fill="#f2df74"/></svg></span>
           </a>
@@ -394,7 +402,6 @@
         <div class="card"><h3>Supportive, actionable feedback</h3><p>Every speaker gets specific, actionable evaluations &mdash; the fastest way we know to actually improve.</p></div>
         <div class="card"><h3>Expand as a leader</h3><p>Contribute to our success through running a meeting, managing a project, or serving as a club officer. We can't think of a better way to hone the very skills that deliver personally and professionally.</p></div>
         <div class="card"><h3>Fun vibes</h3><p>Our club doesn't ask you to fit a mold. We ask only that you show up and grow in whatever way is authentic to you. What we do not embrace: rigid outdated frameworks, policies which inhibit member growth, and cultures mistaking familiarity for value.</p></div>
-        <div class="card"><h3>We welcome your projects</h3><p>Our Members routinely share what they are working on with our club. Whether it's work projects, side projects, or a new venture, our stage is open. See examples further down the page.</p></div>
       </div>
     </div>
   </section>
@@ -405,7 +412,7 @@
       <div class="section-head center">
         <span class="eyebrow">Innovation</span>
         <h2>We break the mold and try new stuff</h2>
-        <p style="text-wrap: balance;">Our club is committed to pushing past outdated, garden-variety formats. Instead, we experiment with innovative meeting formats and topics and extracurricular activities that challenge us and create camaraderie.</p>
+        <p style="text-wrap: balance;">Our club is committed to pushing past outdated, garden-variety formats. We experiment with innovative meeting formats and topics and extracurricular activities that challenge us and create camaraderie.</p>
       </div>
       <div class="card-grid">
         <div class="card"><h3>Stage Nights</h3><p>A dedicated evening for members to perform prepared material in front of a live crowd outside the structure of a normal meeting &mdash; the first of several new stage formats in the works.</p></div>
@@ -425,10 +432,10 @@
         <p>Our people are builders with real projects, sharing their successes and failures with our community. See examples of what shows up in our incubator.</p>
       </div>
       <div class="card-grid">
-        <div class="card project-card"><h3>Shame Club&trade;</h3><p>By Bobby F.</p><a class="project-card__link" href="https://www.shameclub.net/" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
-        <div class="card project-card"><h3>YouTube Channel</h3><p>By Stela Z.</p><a class="project-card__link" href="https://www.youtube.com/@stelazhou" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
-        <div class="card project-card"><h3>Transformational Ties&trade;</h3><p>By London E.</p><a class="project-card__link" href="https://www.transformational-ties.com/" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
-        <div class="card project-card"><h3>UnshakableMe&reg;</h3><p>By Heidi B.</p><a class="project-card__link" href="https://www.unshakableme.com/" target="_blank" rel="noopener">Visit the project &rarr;</a></div>
+        <div class="card project-card"><h3>Shame Club&trade;</h3><p>By Bobby F.</p><a class="project-card__link" href="https://www.shameclub.net/" target="_blank" rel="noopener noreferrer">Visit the project &rarr;</a></div>
+        <div class="card project-card"><h3>YouTube Channel</h3><p>By Stela Z.</p><a class="project-card__link" href="https://www.youtube.com/@stelazhou" target="_blank" rel="noopener noreferrer">Visit the project &rarr;</a></div>
+        <div class="card project-card"><h3>Transformational Ties&trade;</h3><p>By London E.</p><a class="project-card__link" href="https://www.transformational-ties.com/" target="_blank" rel="noopener noreferrer">Visit the project &rarr;</a></div>
+        <div class="card project-card"><h3>UnshakableMe&reg;</h3><p>By Heidi B.</p><a class="project-card__link" href="https://www.unshakableme.com/" target="_blank" rel="noopener noreferrer">Visit the project &rarr;</a></div>
       </div>
     </div>
   </section>
@@ -447,10 +454,10 @@
       <div class="section-head center">
         <span class="eyebrow">About the Club</span>
         <h2>The old playbook died with the dinosaurs&hellip;so we wrote our own!</h2>
-        <p>Northeast Seattle Toastmasters, Club 1161, was chartered in 1952 &mdash; but
-        the club that meets today is diverse, innovative, and dynamic, and it's
-        grown into one of the largest and fastest-growing clubs on the West Coast.
-        What hasn't changed is the community: since 1952 we've helped hundreds of
+        <p>While Northeast Seattle Toastmasters (Club 1161) chartered in 1952,
+        the club today is diverse, innovative, and dynamic. It has grown into one
+        of the largest and fastest-growing clubs on the West Coast. What hasn't
+        changed is the community: since 1952 we have helped hundreds of
         members &mdash; students, engineers, executives, career-changers, retirees,
         entrepreneurs, authors, and other creators &mdash; get more comfortable and
         more capable in front of a room, and build real relationships along the way.</p>
@@ -502,19 +509,12 @@
       </div>
     </div>
     <div class="grid grid--wide">
-      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stela-n.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Member Spotlight</span><h3>Stela N.</h3><p>One of Club 1161's members &mdash; more of her story coming soon.</p></span></a>
-      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-4.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Meeting Highlight</span><h3>Table Topics Night</h3><p>An impromptu question, put to a member on the spot.</p></span></a>
-      <a class="tile" href="#events">
-        <span class="placeholder-flag">Photo needed</span>
-        <span class="tile__media tile__media--placeholder" style="--tile-gradient: linear-gradient(135deg,#221c24,#0a0a0b);">
-          <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
-        </span>
-        <span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="tile__caption"><span class="tag">Upcoming</span><h3>Speech Contest Season</h3><p>Placeholder &mdash; add contest date once confirmed.</p></span>
-      </a>
-      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-1.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>A Prepared Bit on Stage Night</h3><p>Members step outside the normal meeting format to perform prepared material in front of a live crowd.</p></span></a>
-      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-2.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Hosting a Recent Stage Night</h3><p>A dedicated evening for members to take the mic outside the structure of a normal Monday meeting.</p></span></a>
-      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-3.jpg);"></span><span class="tile__glow"></span><span class="tile__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Taking a Turn on Stage Night</h3><p>Another member steps up to share prepared remarks during a themed Stage Night.</p></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stela-n.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Member Spotlight</span><h3>Stela N.</h3></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-4.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Erwin's Evaluation of Catherine at Stage Night</h3></span></a>
+      <a class="tile" href="#events"><span class="tile__media" style="background-image: url(assets/img/spotlights/speech-contest-season.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Upcoming</span><h3>Speech Contest Season</h3></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-1.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>An Impromptu Bit at Stage Night</h3></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-2.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Bobby's Scam Warning</h3></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-3.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Club President Catherine's Opening Remarks</h3></span></a>
     </div>
   </section>
 
@@ -557,12 +557,8 @@
 
       <div class="event-row">
         <div class="event-date"><span class="month">Every</span><span class="day">MON</span></div>
-        <div class="event-body"><h3>Weekly Club Meeting</h3><div class="event-meta">7:30&ndash;9:00 PM &middot; The Fairview Church, Rm 311 &middot; Hybrid - In-Person and Online</div><p>Prepared speeches, table topics, and evaluations. Guests welcome every week, no RSVP required.</p></div>
+        <div class="event-body"><h3>Weekly Club Meeting</h3><div class="event-meta">7:30&ndash;9:00 PM &middot; The Fairview Church, Rm 311 &middot; Hybrid - In-Person and Online</div><p>Prepared speeches, table topics, and evaluations. Guests are welcome every week.</p></div>
 
-      </div>
-      <div class="event-row">
-        <div class="event-date"><span class="month">TBD</span><span class="day">&mdash;</span></div>
-        <div class="event-body"><h3>Member Social</h3><div class="event-meta">Date to be announced</div><p>Placeholder &mdash; a member-only social night, part of our Innovation program's regular get-togethers.</p></div>
       </div>
       <div class="event-row">
         <div class="event-date"><span class="month">TBD</span><span class="day">&mdash;</span></div>
@@ -585,9 +581,9 @@
         <p>Every member moves at their own pace &mdash; this is the typical rapid track, not a requirement.</p>
       </div>
       <div class="timeline">
-        <div class="timeline__step" data-step="1"><span class="timeframe">Before you arrive</span><h3>Check the details, then just show up</h3><p>Mondays, 7:30&ndash;9:00 PM, at The Fairview Church (Rm 311), 844 NE 78th St, Seattle, WA&nbsp;98115 &mdash; in person or by Google Meet. No sign-up, no cost.</p><p><a href="https://drive.google.com/file/d/1IECu5JLL-SxcyfAytlY_2LH_gqBNtPSP/view" target="_blank" rel="noopener" style="color:var(--color-accent);">Meeting Roles &amp; What to Expect (guide) &rarr;</a></p></div>
-        <div class="timeline__step" data-step="2"><span class="timeframe">Your first meeting</span><h3>Sit in and see the format</h3><p>A member greets you at the door and explains the meeting roles. You're welcome to just observe.</p></div>
-        <div class="timeline__step" data-step="3"><span class="timeframe">When you're ready</span><h3>Become an official member</h3><p>Download and complete the <a href="https://content.toastmasters.org/image/upload/800-membership-application-ff.pdf" target="_blank" rel="noopener" style="color:var(--color-accent);">New Member Application</a>, then email it with your dues to <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" style="color:var(--color-accent);">our officers</a>.</p></div>
+        <div class="timeline__step" data-step="1"><span class="timeframe">Before you arrive</span><h3>Check the details, then just show up</h3><p>Mondays, 7:30&ndash;9:00 PM, at The Fairview Church (Rm 311), 844 NE 78th St, Seattle, WA&nbsp;98115 &mdash; in person or by Google Meet.  Park in the free parking lot, and use the South Entrance by ringing the buzzer.</p><p><a href="https://drive.google.com/file/d/1IECu5JLL-SxcyfAytlY_2LH_gqBNtPSP/view" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">Meeting Roles &amp; What to Expect (guide) &rarr;</a></p></div>
+        <div class="timeline__step" data-step="2"><span class="timeframe">Your first meeting</span><h3>Sit in and see the format</h3><p>A member greets you at the door and welcomes you to our community. You're welcome to answer an impromptu speaking prompt, or just observe for the meeting.</p></div>
+        <div class="timeline__step" data-step="3"><span class="timeframe">When you're ready</span><h3>Become an official member</h3><p>Download and complete the <a href="https://content.toastmasters.org/image/upload/800-membership-application-ff.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">New Member Application</a>, then email it to <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" style="color:var(--color-accent);">our officers</a>. Our team will process your application, then our Treasurer will reach out to you for dues payment.</p></div>
         <div class="timeline__step" data-step="4"><span class="timeframe">Weeks 1&ndash;2</span><h3>Get a mentor and pick a Pathway</h3><p>New members are paired with a mentor and choose a Pathways learning track based on their goals.</p></div>
         <div class="timeline__step" data-step="5"><span class="timeframe">Weeks 3&ndash;6</span><h3>Give your Ice Breaker speech</h3><p>Your first prepared speech introduces you to the club &mdash; short, and supportive.</p></div>
         <div class="timeline__step" data-step="6"><span class="timeframe">Months 2&ndash;6</span><h3>Build momentum</h3><p>Take on a meeting role, give 2&ndash;3 more speeches, and get comfortable with structured feedback.</p><p><a href="#spotlights" style="color:var(--color-accent);">See Member Spotlights &rarr;</a></p></div>
@@ -599,9 +595,9 @@
   <section class="cta-band">
     <div class="container">
       <h2>See you Monday at 7:30!</h2>
-      <p>The Fairview Church, Room 311 &mdash; 844 NE 78th St, Seattle, WA&nbsp;98115. In person or on Zoom.</p>
+      <p>The Fairview Church, Room 311 &mdash; 844 NE 78th St, Seattle, WA&nbsp;98115. In person or on Google Meet.</p>
       <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" class="btn btn--primary">RSVP Now</a>
-      <div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Follow @neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>Watch on YouTube</span></a></div>
+      <div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Follow @neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>Watch on YouTube</span></a></div>
     </div>
   </section>
 
@@ -612,7 +608,7 @@
     <div class="footer-grid">
       <div><h4>Northeast Seattle Toastmasters</h4><p style="max-width:320px;">Club 1161, chartered 1952. Part of Toastmasters International, District&nbsp;2, Area&nbsp;B26.</p></div>
       <div><h4>Explore</h4><ul><li><a href="#innovation">Innovation</a></li><li><a href="#member-projects">Member Projects</a></li><li><a href="#about">About &amp; Officers</a></li><li><a href="#awards">Awards</a></li><li><a href="#spotlights">Spotlights</a></li><li><a href="#club-news">Club News</a></li><li><a href="#events">Events</a></li><li><a href="#getting-started">Getting Started</a></li></ul></div>
-      <div><h4>Connect</h4><ul><li><a href="https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club" target="_blank" rel="noopener">Toastmasters Find-a-Club</a></li><li><a href="mailto:vp-pr@neseattletoastmasters.org">Email the Club</a></li></ul><div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>@neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>YouTube</span></a></div></div>
+      <div><h4>Connect</h4><ul><li><a href="https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club" target="_blank" rel="noopener noreferrer">Toastmasters Find-a-Club</a></li><li><a href="mailto:vp-pr@neseattletoastmasters.org">Email the Club</a></li></ul><div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>@neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>YouTube</span></a></div></div>
     </div>
     <div class="footer-bottom" style="flex-direction: column; align-items: flex-start; gap: 0.6rem;">
       <p style="max-width: 640px; font-size: 0.78rem; color: var(--color-text-faint); margin: 0;">The information on this website is for the sole use of Toastmasters&rsquo; members, for Toastmasters business only. It is not to be used for solicitation and distribution of non-Toastmasters material or information.</p>
@@ -692,14 +688,39 @@
         empty.className = 'calendar__day is-empty';
         calGrid.appendChild(empty);
       }
+      var mondayCount = 0;
       for (var d = 1; d <= daysInMonth; d++) {
         var cell = document.createElement('span');
         var dow = new Date(viewYear, viewMonth, d).getDay();
         var classes = ['calendar__day'];
-        if (dow === 1) classes.push('is-meeting');
+        var note = null;
+        if (dow === 1) {
+          mondayCount++;
+          classes.push('is-meeting');
+          var isCancelled = (viewYear === 2026 && viewMonth === 8 && d === 7);
+          if (isCancelled) {
+            classes.push('is-cancelled', 'has-note');
+            note = 'Cancelled';
+          } else if (mondayCount === 2 || mondayCount === 4) {
+            classes.push('is-inperson', 'has-note');
+            note = 'In-person';
+          }
+        }
         if (viewYear === today.getFullYear() && viewMonth === today.getMonth() && d === today.getDate()) classes.push('is-today');
         cell.className = classes.join(' ');
-        cell.textContent = d;
+        if (note) {
+          var numSpan = document.createElement('span');
+          numSpan.className = 'day-num';
+          numSpan.textContent = d;
+          var noteSpan = document.createElement('span');
+          noteSpan.className = 'day-note';
+          noteSpan.textContent = note;
+          cell.appendChild(numSpan);
+          cell.appendChild(noteSpan);
+          cell.title = note === 'Cancelled' ? 'This meeting is cancelled' : 'In-person meeting this week';
+        } else {
+          cell.textContent = d;
+        }
         calGrid.appendChild(cell);
       }
     }
@@ -723,12 +744,19 @@
     if (!thumb || !wrap) return;
     thumb.addEventListener('click', function (e) {
       e.preventDefault();
-      var videoId = thumb.getAttribute('data-video-id');
+      var videoId = thumb.getAttribute('data-video-id') || '';
+      // Defense-in-depth: only ever build an embed URL from a value that
+      // matches YouTube's fixed 11-character ID shape, even though this
+      // attribute is our own static markup today, not user input.
+      if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) return;
       var iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+      // youtube-nocookie.com avoids setting YouTube tracking cookies until
+      // the viewer actually presses play.
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0';
       iframe.setAttribute('title', 'Club video');
-      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
       iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       wrap.innerHTML = '';
       wrap.appendChild(iframe);
     });
