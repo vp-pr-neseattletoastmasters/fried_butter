@@ -4,9 +4,10 @@ A single-page static site. No build step, no framework, no dependencies beyond
 two Google Fonts loaded via `<link>` tags in `index.html`. Open `index.html`
 in a browser and it works as-is.
 
-This is the **soft launch** export — it reflects everything through Batch 33,
-including the security hardening pass (Content-Security-Policy, hardened
-external links, hardened YouTube embed) and the latest content/copy edits.
+This export reflects everything through **Batch 35**, including the venue
+move to Seattle Foursquare Church, the updated meeting calendar, two new
+officer photos, and the earlier security hardening pass
+(Content-Security-Policy, hardened external links, hardened YouTube embed).
 It updates the site already live at **www.neseattletoastmasters.org**.
 
 ## What's in this export
@@ -19,13 +20,39 @@ It updates the site already live at **www.neseattletoastmasters.org**.
 - `assets/img/` — every photo and the club logo, as real image files
   (embedded inline in the working draft; extracted here so the browser can
   cache them separately and the HTML stays small). Same file names/paths as
-  the previous export, plus one new file: `assets/img/spotlights/speech-contest-season.jpg`.
+  the previous export, plus three new files added for this batch:
+  `assets/img/officers/president.jpg` (Catherine E.),
+  `assets/img/officers/treasurer.jpg` (Dallas H.), and
+  `assets/img/club-news/fairview-building.jpg` (the new "Thank You Fairview
+  Church" news tile).
 
 This replaces the earlier multi-page draft (`index.html` / `about.html` /
 `spotlights.html` / `events.html` / `getting-started.html` + `css/style.css`)
 from the very first pass at this project — that structure was abandoned early
 on in favor of the single scrolling page you have here, which is what's been
 refined ever since.
+
+## What's new in this export (Batch 35)
+
+- **Venue change:** the club now meets 100% in-person at **Seattle Foursquare
+  Church, 400 N 105th St, Seattle, WA 98133** (previously hybrid at The
+  Fairview Church). This is reflected in the meeting-info card, the Getting
+  Started section, the Weekly Club Meeting event row, and the closing CTA
+  band. The Google Meet virtual link is still shown but now labeled "Ends
+  September 22nd."
+- **Two new officer photos:** Catherine E. (President) and Dallas H.
+  (Treasurer) now have real headshots instead of placeholder avatars.
+- **Events calendar overhaul:** the calendar now shows specific cancelled
+  dates (Sept 7, Nov 30, Dec 21, Dec 28, 2026), specific "Members Only" dates
+  (Sept 14 and 21, 2026), and every Monday from Sept 28, 2026 onward labeled
+  "In-person."
+- **New Club News tile:** "Thank You Fairview Church," thanking the club's
+  former venue and welcoming the new one.
+- **VP Membership** now shows "Nomination Pending" instead of a named
+  placeholder.
+- A "See our dues table" link and a "follow these directions" (parking)
+  link were added to the Getting Started section, both pointing to Google
+  Drive documents.
 
 ## Updating the live GitHub Pages site
 
@@ -39,7 +66,7 @@ existing repo rather than starting a new one:
 2. From the repo folder:
    ```bash
    git add -A
-   git commit -m "Soft launch update — Batches 29-33"
+   git commit -m "Venue change to Seattle Foursquare Church, new officer photos, calendar update"
    git push
    ```
 3. GitHub Pages rebuilds automatically after the push — give it a minute or
@@ -76,18 +103,22 @@ beyond pointing the host at `index.html`.
 ## Before this goes live
 
 - **Verify meeting details against Club Central** — day/time, location, and
-  format (currently: Mondays, 7:30–9:00 PM, hybrid, The Fairview Church,
-  Room 311, 844 NE 78th St, Seattle, WA 98115) — cross-check against the
-  official Toastmasters "Find a Club" listing:
+  format (currently: Mondays, 7:30–9:00 PM, 100% in-person, Seattle
+  Foursquare Church, 400 N 105th St, Seattle, WA 98133) — cross-check against
+  the official Toastmasters "Find a Club" listing:
   <https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club>
-- **Officer photos** — 2 of 7 officers (VP Innovation, VP Public Relations)
-  have real photos; the other 5 still show initials-only avatars. Search
-  `index.html` for `officer-avatar` to find them.
-- **Event dates** — the Speech Contest Season spotlight tile now has a real
+- **Officer photos** — 4 of 7 officers (President, Treasurer, VP Innovation,
+  VP Public Relations) have real photos; VP Education and VP Operations still
+  show initials-only avatars, and VP Membership ("Nomination Pending") has no
+  photo by design. Search `index.html` for `officer-avatar` to find them.
+- **Event dates** — the Speech Contest Season spotlight tile has a real
   photo, but it (and the matching entry in the Events calendar) still need a
   real, confirmed contest date.
 - **Media Kit** — the Media Kit card currently states a release timeline
   (early Fall 2026); the PDF itself doesn't exist yet and isn't linked.
+- **"Follow these directions" parking link** — this now links to a Google
+  Drive doc; confirm it's the right one and that sharing permissions are set
+  so visitors can view it without requesting access.
 
 ## Security notes
 

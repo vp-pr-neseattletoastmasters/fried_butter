@@ -284,6 +284,8 @@
   .calendar__day .day-num { font-size: 0.8rem; }
   .calendar__day .day-note { font-size: 0.42rem; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 700; }
   .calendar__day.is-inperson .day-note { color: var(--color-accent); }
+  .calendar__day.is-members-only { background: rgba(169,178,177,0.18); border: 1px solid rgba(169,178,177,0.4); }
+  .calendar__day.is-members-only .day-note { color: var(--color-text-dim); }
   .calendar__day.is-cancelled { background: rgba(119,36,50,0.25); border: 1px solid rgba(119,36,50,0.6); }
   .calendar__day.is-cancelled .day-num { text-decoration: line-through; color: var(--color-text-faint); font-weight: 600; }
   .calendar__day.is-cancelled .day-note { color: #d99aa3; }
@@ -327,7 +329,6 @@
 </style>
 </head>
 <body>
-
 <header class="site-header">
   <div class="container nav">
     <a href="#home" class="nav__brand">
@@ -374,9 +375,9 @@
       </div>
       <div class="meeting-card">
         <div class="meeting-card__item"><span class="label">Day &amp; Time</span><span class="value">Mondays, 7:30&ndash;9:00 PM</span></div>
-        <div class="meeting-card__item"><span class="label">Format</span><span class="value">Hybrid - In-Person and Online</span></div>
-        <div class="meeting-card__item"><span class="label">Location</span><span class="value">The Fairview Church, Rm&nbsp;311<br>844 NE 78th St, Seattle, WA&nbsp;98115</span></div>
-        <div class="meeting-card__cta"><a href="https://meet.google.com/tef-kmyi-xxb" target="_blank" rel="noopener noreferrer" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Virtual Meeting Link</a></div>
+        <div class="meeting-card__item"><span class="label">Format</span><span class="value">100% In-Person</span></div>
+        <div class="meeting-card__item"><span class="label">Location</span><span class="value">Seattle Foursquare Church<br>400 N 105th St, Seattle, WA&nbsp;98133</span></div>
+        <div class="meeting-card__cta"><a href="https://meet.google.com/tef-kmyi-xxb" target="_blank" rel="noopener noreferrer" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Virtual Meeting Link (Ends September 22nd)</a></div>
       </div>
     </div>
   </section>
@@ -473,13 +474,13 @@
         <h2>Meet Your <span class="accent-italic">Officers</span></h2>
       </div>
       <div class="card-grid">
-        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">President</div><h3>Catherine E.</h3><p>Putting Members at the center of what we do, setting the vision, and leading the club's transformation for the 2026&ndash;2027 term.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/president.jpg" alt="Catherine E. headshot"></div><div><div class="officer-role">President</div><h3>Catherine E.</h3><p>Putting Members at the center of what we do, setting the vision, and leading the club's transformation for the 2026&ndash;2027 term.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Education</div><h3>Lisa H.</h3><p>Tailoring the club's education program and Pathways tracks to each Member.</p></div></div>
-        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Membership</div><h3>Heidi H.</h3><p>Welcoming new members and guests to Club 1161.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Membership</div><h3>Nomination Pending</h3><p>Welcoming new members and guests to Club 1161.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/vp-public-relations.jpg" alt="VP Public Relations headshot"></div><div><div class="officer-role">VP Public Relations</div><h3>London E.</h3><p>Leading the club's 2026&ndash;2027 branding, marketing, and online presence.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/vp-innovation.jpg" alt="VP Innovation headshot"></div><div><div class="officer-role">VP Innovation</div><h3>Bobby F.</h3><p>Leading ways to expand our members' growth and camaraderie, both at regular meetings and beyond.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Operations</div><h3>Rick R.</h3><p>Keeping weekly meetings running smoothly.</p></div></div>
-        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">Treasurer</div><h3>Dallas H.</h3><p>Managing the club's dues and budget.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/treasurer.jpg" alt="Dallas H. headshot"></div><div><div class="officer-role">Treasurer</div><h3>Dallas H.</h3><p>Managing the club's dues and budget.</p></div></div>
       </div>
     </div>
   </section>
@@ -529,7 +530,7 @@
       <div class="news-carousel-wrap">
         <button type="button" class="calendar__nav news-carousel__nav" id="newsPrev" aria-label="Previous news item">&#8249;</button>
         <div class="news-carousel" id="newsCarousel">
-<article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/five-goals.png);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Club Achievement</span><h3>Distinguished Club Status Achieved</h3><p>Club 1161 earned Distinguished Status for the 2026 - 2027 year on 31 August, a new club history record! Our membership has also climbed to a very respectable 34 creators.</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/group-photo-full.jpg);background-size:contain;background-repeat:no-repeat;background-position:center;background-color:var(--color-surface);"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Officers</span><h3>2026 - 2027 Officers Sworn In</h3><p>On 1 July 2026, a new era of growth and innovation officially arrived!</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/two-people.jpg);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Member Moment</span><h3>Celebrating Our Success at the Annual Club Picnic</h3><p>Catherine and Dallas (left to right) talking about sports at the annual Club Picnic.</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/smedley-award.png);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Club Achievement</span><h3>Smedley Distinguished &mdash; 10 of 10 Goals Met</h3><p>Club 1161 earned Smedley Distinguished recognition for the 2025 - 2026 program year, meeting every one of Toastmasters International&rsquo;s ten club goals.</p></div></article>        </div>
+<article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/fairview-building.jpg);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Venue Change</span><h3>Thank You Fairview Church</h3><p>We are grateful for many years of partnership with Fairview Church, and are excited for our new relationship with Seattle Foursquare Church.</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/five-goals.png);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Club Achievement</span><h3>Distinguished Club Status Achieved</h3><p>Club 1161 earned Distinguished Status for the 2026 - 2027 year on 31 August, a new club history record! Our membership has also climbed to a very respectable 34 creators.</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/group-photo-full.jpg);background-size:contain;background-repeat:no-repeat;background-position:center;background-color:var(--color-surface);"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Officers</span><h3>2026 - 2027 Officers Sworn In</h3><p>On 1 July 2026, a new era of growth and innovation officially arrived!</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/two-people.jpg);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Member Moment</span><h3>Celebrating Our Success at the Annual Club Picnic</h3><p>Catherine and Dallas (left to right) talking about sports at the annual Club Picnic.</p></div></article><article class="news-card"><div class="news-card__media" style="background-image:url(assets/img/club-news/smedley-award.png);background-size:cover;background-position:center;"></div><div class="news-card__body"><span class="tag" style="display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.3rem;font-weight:700;">Club Achievement</span><h3>Smedley Distinguished &mdash; 10 of 10 Goals Met</h3><p>Club 1161 earned Smedley Distinguished recognition for the 2025 - 2026 program year, meeting every one of Toastmasters International&rsquo;s ten club goals.</p></div></article>        </div>
         <button type="button" class="calendar__nav news-carousel__nav" id="newsNext" aria-label="Next news item">&#8250;</button>
       </div>
     </div>
@@ -552,12 +553,12 @@
         </div>
         <div class="calendar__weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
         <div class="calendar__grid" id="calGrid"></div>
-        <div class="calendar__legend"><span class="calendar__dot"></span> Weekly club meeting, every Monday &mdash; social and contest dates are announced separately below once confirmed.</div>
+        <div class="calendar__legend"><span class="calendar__dot"></span> Weekly club meeting, every Monday &mdash; contest dates are announced separately below once confirmed.</div>
       </div>
 
       <div class="event-row">
         <div class="event-date"><span class="month">Every</span><span class="day">MON</span></div>
-        <div class="event-body"><h3>Weekly Club Meeting</h3><div class="event-meta">7:30&ndash;9:00 PM &middot; The Fairview Church, Rm 311 &middot; Hybrid - In-Person and Online</div><p>Prepared speeches, table topics, and evaluations. Guests are welcome every week.</p></div>
+        <div class="event-body"><h3>Weekly Club Meeting</h3><div class="event-meta">7:30&ndash;9:00 PM &middot; Seattle Foursquare Church &middot; 100% In-Person</div><p>Prepared speeches, table topics, and evaluations. Guests are welcome every week.</p></div>
 
       </div>
       <div class="event-row">
@@ -581,10 +582,10 @@
         <p>Every member moves at their own pace &mdash; this is the typical rapid track, not a requirement.</p>
       </div>
       <div class="timeline">
-        <div class="timeline__step" data-step="1"><span class="timeframe">Before you arrive</span><h3>Check the details, then just show up</h3><p>Mondays, 7:30&ndash;9:00 PM, at The Fairview Church (Rm 311), 844 NE 78th St, Seattle, WA&nbsp;98115 &mdash; in person or by Google Meet.  Park in the free parking lot, and use the South Entrance by ringing the buzzer.</p><p><a href="https://drive.google.com/file/d/1IECu5JLL-SxcyfAytlY_2LH_gqBNtPSP/view" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">Meeting Roles &amp; What to Expect (guide) &rarr;</a></p></div>
+        <div class="timeline__step" data-step="1"><span class="timeframe">Before you arrive</span><h3>Check the details, then just show up</h3><p>Mondays, 7:30&ndash;9:00 PM, at the Seattle Foursquare Church, 400 N 105th St, Seattle, WA&nbsp;98133 &mdash; 100% in-person. Park in the free parking lot, and <a href="https://drive.google.com/file/d/15eFzYPVN31bddEtu2vtMNXpmjFjAaWo9/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">follow these directions</a>.</p><p><a href="https://drive.google.com/file/d/1IECu5JLL-SxcyfAytlY_2LH_gqBNtPSP/view" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">Meeting Roles &amp; What to Expect (guide) &rarr;</a></p></div>
         <div class="timeline__step" data-step="2"><span class="timeframe">Your first meeting</span><h3>Sit in and see the format</h3><p>A member greets you at the door and welcomes you to our community. You're welcome to answer an impromptu speaking prompt, or just observe for the meeting.</p></div>
-        <div class="timeline__step" data-step="3"><span class="timeframe">When you're ready</span><h3>Become an official member</h3><p>Download and complete the <a href="https://content.toastmasters.org/image/upload/800-membership-application-ff.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">New Member Application</a>, then email it to <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" style="color:var(--color-accent);">our officers</a>. Our team will process your application, then our Treasurer will reach out to you for dues payment.</p></div>
-        <div class="timeline__step" data-step="4"><span class="timeframe">Weeks 1&ndash;2</span><h3>Get a mentor and pick a Pathway</h3><p>New members are paired with a mentor and choose a Pathways learning track based on their goals.</p></div>
+        <div class="timeline__step" data-step="3"><span class="timeframe">When you're ready</span><h3>Become an official member</h3><p>Download and complete the <a href="https://content.toastmasters.org/image/upload/800-membership-application-ff.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">New Member Application</a>, then email it to <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" style="color:var(--color-accent);">our officers</a>. Our team will process your application, then our Treasurer will reach out to you for dues payment.  <a href="https://drive.google.com/file/d/1XJRfqAqPCocwXiFYZp443QOtzE56Edme/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">See our dues table</a>.</p></div>
+        <div class="timeline__step" data-step="4"><span class="timeframe">Weeks 1&ndash;2</span><h3>Get a mentor and pick a Pathway</h3><p>New members can find a mentor and choose a Pathways learning track based on their goals.  It is the responsibility of the member to reach out to their mentors.</p></div>
         <div class="timeline__step" data-step="5"><span class="timeframe">Weeks 3&ndash;6</span><h3>Give your Ice Breaker speech</h3><p>Your first prepared speech introduces you to the club &mdash; short, and supportive.</p></div>
         <div class="timeline__step" data-step="6"><span class="timeframe">Months 2&ndash;6</span><h3>Build momentum</h3><p>Take on a meeting role, give 2&ndash;3 more speeches, and get comfortable with structured feedback.</p><p><a href="#spotlights" style="color:var(--color-accent);">See Member Spotlights &rarr;</a></p></div>
         <div class="timeline__step" data-step="7"><span class="timeframe">6+ months</span><h3>Step into leadership</h3><p>Run for a club officer role, mentor the next new guest, or compete at an Area speech contest.</p></div>
@@ -595,7 +596,7 @@
   <section class="cta-band">
     <div class="container">
       <h2>See you Monday at 7:30!</h2>
-      <p>The Fairview Church, Room 311 &mdash; 844 NE 78th St, Seattle, WA&nbsp;98115. In person or on Google Meet.</p>
+      <p>Seattle Foursquare Church &mdash; 400 N 105th St, Seattle, WA&nbsp;98133. 100% in-person.</p>
       <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" class="btn btn--primary">RSVP Now</a>
       <div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Follow @neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>Watch on YouTube</span></a></div>
     </div>
@@ -688,20 +689,39 @@
         empty.className = 'calendar__day is-empty';
         calGrid.appendChild(empty);
       }
-      var mondayCount = 0;
+      // Meetings are cancelled or members-only on specific dates; every meeting
+      // from IN_PERSON_START onward reflects the move to the fully in-person venue.
+      var CANCELLED_DATES = [
+        [2026, 8, 7],    // Sept 7, 2026
+        [2026, 10, 30],  // Nov 30, 2026
+        [2026, 11, 21],  // Dec 21, 2026
+        [2026, 11, 28]   // Dec 28, 2026
+      ];
+      var MEMBERS_ONLY_DATES = [
+        [2026, 8, 14],   // Sept 14, 2026
+        [2026, 8, 21]    // Sept 21, 2026
+      ];
+      var IN_PERSON_START = new Date(2026, 8, 28); // Sept 28, 2026 and every meeting after
+      function matchesDate(list, y, m, d) {
+        for (var i = 0; i < list.length; i++) {
+          if (list[i][0] === y && list[i][1] === m && list[i][2] === d) return true;
+        }
+        return false;
+      }
       for (var d = 1; d <= daysInMonth; d++) {
         var cell = document.createElement('span');
         var dow = new Date(viewYear, viewMonth, d).getDay();
         var classes = ['calendar__day'];
         var note = null;
         if (dow === 1) {
-          mondayCount++;
           classes.push('is-meeting');
-          var isCancelled = (viewYear === 2026 && viewMonth === 8 && d === 7);
-          if (isCancelled) {
+          if (matchesDate(CANCELLED_DATES, viewYear, viewMonth, d)) {
             classes.push('is-cancelled', 'has-note');
             note = 'Cancelled';
-          } else if (mondayCount === 2 || mondayCount === 4) {
+          } else if (matchesDate(MEMBERS_ONLY_DATES, viewYear, viewMonth, d)) {
+            classes.push('is-members-only', 'has-note');
+            note = 'Members Only';
+          } else if (new Date(viewYear, viewMonth, d) >= IN_PERSON_START) {
             classes.push('is-inperson', 'has-note');
             note = 'In-person';
           }
@@ -717,7 +737,7 @@
           noteSpan.textContent = note;
           cell.appendChild(numSpan);
           cell.appendChild(noteSpan);
-          cell.title = note === 'Cancelled' ? 'This meeting is cancelled' : 'In-person meeting this week';
+          cell.title = note === 'Cancelled' ? 'This meeting is cancelled' : (note === 'Members Only' ? 'Members-only meeting this week' : 'In-person meeting this week');
         } else {
           cell.textContent = d;
         }
