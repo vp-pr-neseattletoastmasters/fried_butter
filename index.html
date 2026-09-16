@@ -105,6 +105,8 @@
   .btn--primary:hover { background: #dcb862; }
   .btn--outline { background: transparent; color: var(--color-text); border-color: var(--color-border); }
   .btn--outline:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .copy-emails-btn { background: none; border: none; padding: 0; margin: 0; font: inherit; color: var(--color-accent); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .copy-emails-btn:hover { color: var(--color-text); }
   .nav__cta .btn--outline { border-color: var(--color-accent); color: var(--color-accent); }
   .nav__cta .btn--outline:hover { background: rgba(var(--color-accent-rgb), 0.1); }
 
@@ -377,7 +379,7 @@
         <div class="meeting-card__item"><span class="label">Day &amp; Time</span><span class="value">Mondays, 7:30&ndash;9:00 PM</span></div>
         <div class="meeting-card__item"><span class="label">Format</span><span class="value">100% In-Person</span></div>
         <div class="meeting-card__item"><span class="label">Location</span><span class="value">Seattle Foursquare Church<br>400 N 105th St, Seattle, WA&nbsp;98133</span></div>
-        <div class="meeting-card__cta"><a href="https://meet.google.com/tef-kmyi-xxb" target="_blank" rel="noopener noreferrer" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Virtual Meeting Link (Ends September 22nd)</a></div>
+        <div class="meeting-card__cta"><a href="#clubCalendar" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar of Events</a></div>
       </div>
     </div>
   </section>
@@ -476,7 +478,7 @@
       <div class="card-grid">
         <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/president.jpg" alt="Catherine E. headshot"></div><div><div class="officer-role">President</div><h3>Catherine E.</h3><p>Putting Members at the center of what we do, setting the vision, and leading the club's transformation for the 2026&ndash;2027 term.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Education</div><h3>Lisa H.</h3><p>Tailoring the club's education program and Pathways tracks to each Member.</p></div></div>
-        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Membership</div><h3>Nomination Pending</h3><p>Welcoming new members and guests to Club 1161.</p></div></div>
+        <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Membership</div><h3>Doni K.</h3><p>Welcoming new members and guests to Club 1161.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/vp-public-relations.jpg" alt="VP Public Relations headshot"></div><div><div class="officer-role">VP Public Relations</div><h3>London E.</h3><p>Leading the club's 2026&ndash;2027 branding, marketing, and online presence.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar"><img src="assets/img/officers/vp-innovation.jpg" alt="VP Innovation headshot"></div><div><div class="officer-role">VP Innovation</div><h3>Bobby F.</h3><p>Leading ways to expand our members' growth and camaraderie, both at regular meetings and beyond.</p></div></div>
         <div class="card officer-card"><div class="officer-avatar">?</div><div><div class="officer-role">VP Operations</div><h3>Rick R.</h3><p>Keeping weekly meetings running smoothly.</p></div></div>
@@ -513,7 +515,7 @@
       <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stela-n.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Member Spotlight</span><h3>Stela N.</h3></span></a>
       <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-4.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Erwin's Evaluation of Catherine at Stage Night</h3></span></a>
       <a class="tile" href="#events"><span class="tile__media" style="background-image: url(assets/img/spotlights/speech-contest-season.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Upcoming</span><h3>Speech Contest Season</h3></span></a>
-      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-1.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>An Impromptu Bit at Stage Night</h3></span></a>
+      <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-1.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>London's Impromptu Bit at Stage Night</h3></span></a>
       <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-2.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Bobby's Scam Warning</h3></span></a>
       <a class="tile" href="#spotlights"><span class="tile__media" style="background-image: url(assets/img/spotlights/stage-night-3.jpg);"></span><span class="tile__glow"></span><span class="tile__caption"><span class="tag">Stage Night</span><h3>Club President Catherine's Opening Remarks</h3></span></a>
     </div>
@@ -584,7 +586,7 @@
       <div class="timeline">
         <div class="timeline__step" data-step="1"><span class="timeframe">Before you arrive</span><h3>Check the details, then just show up</h3><p>Mondays, 7:30&ndash;9:00 PM, at the Seattle Foursquare Church, 400 N 105th St, Seattle, WA&nbsp;98133 &mdash; 100% in-person. Park in the free parking lot, and <a href="https://drive.google.com/file/d/15eFzYPVN31bddEtu2vtMNXpmjFjAaWo9/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">follow these directions</a>.</p><p><a href="https://drive.google.com/file/d/1IECu5JLL-SxcyfAytlY_2LH_gqBNtPSP/view" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">Meeting Roles &amp; What to Expect (guide) &rarr;</a></p></div>
         <div class="timeline__step" data-step="2"><span class="timeframe">Your first meeting</span><h3>Sit in and see the format</h3><p>A member greets you at the door and welcomes you to our community. You're welcome to answer an impromptu speaking prompt, or just observe for the meeting.</p></div>
-        <div class="timeline__step" data-step="3"><span class="timeframe">When you're ready</span><h3>Become an official member</h3><p>Download and complete the <a href="https://content.toastmasters.org/image/upload/800-membership-application-ff.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">New Member Application</a>, then email it to <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" style="color:var(--color-accent);">our officers</a>. Our team will process your application, then our Treasurer will reach out to you for dues payment.  <a href="https://drive.google.com/file/d/1XJRfqAqPCocwXiFYZp443QOtzE56Edme/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">See our dues table</a>.</p></div>
+        <div class="timeline__step" data-step="3"><span class="timeframe">When you're ready</span><h3>Become an official member</h3><p>Download and complete the <a href="https://content.toastmasters.org/image/upload/800-membership-application-ff.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">New Member Application</a>, then email it to <a href="mailto:vpmembership@neseattletoastmasters.org;vp-pr@neseattletoastmasters.org;treasurer@neseattletoastmasters.org" style="color:var(--color-accent);">our officers</a> (<button type="button" class="copy-emails-btn" data-emails="vpmembership@neseattletoastmasters.org; vp-pr@neseattletoastmasters.org; treasurer@neseattletoastmasters.org">Copy Emails Instead</button>). Our team will process your application, then our Treasurer will reach out to you for dues payment.  <a href="https://drive.google.com/file/d/1XJRfqAqPCocwXiFYZp443QOtzE56Edme/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:var(--color-accent);">See our dues table</a>.</p></div>
         <div class="timeline__step" data-step="4"><span class="timeframe">Weeks 1&ndash;2</span><h3>Get a mentor and pick a Pathway</h3><p>New members can find a mentor and choose a Pathways learning track based on their goals.  It is the responsibility of the member to reach out to their mentors.</p></div>
         <div class="timeline__step" data-step="5"><span class="timeframe">Weeks 3&ndash;6</span><h3>Give your Ice Breaker speech</h3><p>Your first prepared speech introduces you to the club &mdash; short, and supportive.</p></div>
         <div class="timeline__step" data-step="6"><span class="timeframe">Months 2&ndash;6</span><h3>Build momentum</h3><p>Take on a meeting role, give 2&ndash;3 more speeches, and get comfortable with structured feedback.</p><p><a href="#spotlights" style="color:var(--color-accent);">See Member Spotlights &rarr;</a></p></div>
@@ -597,7 +599,8 @@
     <div class="container">
       <h2>See you Monday at 7:30!</h2>
       <p>Seattle Foursquare Church &mdash; 400 N 105th St, Seattle, WA&nbsp;98133. 100% in-person.</p>
-      <a href="mailto:vpmembership@neseattletoastmasters.org,vp-pr@neseattletoastmasters.org,treasurer@neseattletoastmasters.org" class="btn btn--primary">RSVP Now</a>
+      <a href="mailto:vpmembership@neseattletoastmasters.org;vp-pr@neseattletoastmasters.org;treasurer@neseattletoastmasters.org" class="btn btn--primary">RSVP Now</a>
+      <div style="margin-top:0.75rem;"><button type="button" class="copy-emails-btn" data-emails="vpmembership@neseattletoastmasters.org; vp-pr@neseattletoastmasters.org; treasurer@neseattletoastmasters.org">Copy Emails Instead</button></div>
       <div class="social-links"><a href="https://www.instagram.com/neseattletoastmasters/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Follow @neseattletoastmasters</span></a><a href="https://www.youtube.com/@NESeattleToastmasters" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9z" fill="currentColor" stroke="none"/></svg><span>Watch on YouTube</span></a></div>
     </div>
   </section>
@@ -795,6 +798,65 @@
     }
     prev.addEventListener('click', function () { scrollByCard(-1); });
     next.addEventListener('click', function () { scrollByCard(1); });
+  })();
+
+  // "Copy Emails Instead" buttons next to multi-recipient mailto
+  // links: copies the same semicolon-separated address list to the
+  // clipboard, for anyone whose email client won't open a mailto: link.
+  // Three-step fallback chain, since the modern async Clipboard API is
+  // blocked in a lot of real-world contexts (non-HTTPS pages, sandboxed
+  // preview panes, older browsers, denied permission prompts):
+  //   1. navigator.clipboard.writeText() — the modern API.
+  //   2. document.execCommand('copy') on a temporary, off-screen textarea
+  //      — an older API that works in more places but is being phased out.
+  //   3. window.prompt() with the address list pre-filled and selected —
+  //      always works, since it just needs the user to press Ctrl/Cmd+C.
+  (function () {
+    function legacyCopy(text) {
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.top = '-1000px';
+      textarea.style.left = '-1000px';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      document.body.removeChild(textarea);
+      return ok;
+    }
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.copy-emails-btn');
+      if (!btn) return;
+      var emails = btn.getAttribute('data-emails');
+      if (!emails) return;
+      var originalText = btn.textContent;
+      var resetTimer;
+      function showFeedback(text) {
+        clearTimeout(resetTimer);
+        btn.textContent = text;
+        resetTimer = setTimeout(function () { btn.textContent = originalText; }, 2500);
+      }
+      function tryLegacyThenPrompt() {
+        if (legacyCopy(emails)) {
+          showFeedback('Copied!');
+        } else {
+          window.prompt('Copy this address list (Ctrl/Cmd+C, then Enter):', emails);
+          showFeedback('Copy Emails Instead');
+        }
+      }
+      if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(emails).then(function () {
+          showFeedback('Copied!');
+        }, function () {
+          tryLegacyThenPrompt();
+        });
+      } else {
+        tryLegacyThenPrompt();
+      }
+    });
   })();
 </script>
 </body>
