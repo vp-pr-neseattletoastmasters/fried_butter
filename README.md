@@ -4,10 +4,9 @@ A single-page static site. No build step, no framework, no dependencies beyond
 two Google Fonts loaded via `<link>` tags in `index.html`. Open `index.html`
 in a browser and it works as-is.
 
-This export reflects everything through **Batch 39**, including the venue
-move to Seattle Foursquare Church, the updated meeting calendar, officer
-roster changes, the copy-to-clipboard email buttons (now with a hardened
-fallback chain so they work in more browsers), and the earlier security
+This export reflects everything through **Batch 40**, including Doni K.'s
+officer photo, the reworded RSVP-focused Getting Started copy, and the earlier
+venue change, calendar overhaul, copy-to-clipboard fallback fix, and security
 hardening pass (Content-Security-Policy, hardened external links, hardened
 YouTube embed). It updates the site already live at
 **www.neseattletoastmasters.org**.
@@ -22,7 +21,8 @@ YouTube embed). It updates the site already live at
 - `assets/img/` — every photo and the club logo, as real image files
   (embedded inline in the working draft; extracted here so the browser can
   cache them separately and the HTML stays small). Same file names/paths as
-  the previous export — no new photos were added in this batch.
+  the previous export, plus one new file: `assets/img/officers/vp-membership.jpg`
+  (Doni K.'s new headshot).
 
 This replaces the earlier multi-page draft (`index.html` / `about.html` /
 `spotlights.html` / `events.html` / `getting-started.html` + `css/style.css`)
@@ -32,20 +32,15 @@ refined ever since.
 
 ## What's new in this export since the last one
 
-- **VP Membership** is now "Doni K." (was "Nomination Pending").
-- **Meeting-card button changed:** the old "Virtual Meeting Link" button is
-  now "Calendar of Events" with a calendar icon, and takes visitors straight
-  to the Events calendar instead of the Google Meet link. Note: the Google
-  Meet link itself no longer appears anywhere on the page as a result — flag
-  if you'd like it linked somewhere else.
-- **Multi-recipient email links** (the "our officers" link and the "RSVP Now"
-  button) now separate addresses with semicolons instead of commas, and each
-  has a "Copy Emails Instead" button next to it. That button now uses a
-  three-step fallback (modern clipboard API → legacy `execCommand` → a
-  manual copy prompt) so it works even in browsers or preview panes that
-  block the newer clipboard API.
-- The Spotlights tile "An Impromptu Bit at Stage Night" now reads "London's
-  Impromptu Bit at Stage Night."
+- **Doni K.'s officer photo.** VP Membership now has a real, face-centered
+  photo in place of the initials-only avatar — the officer roster is now 5 of
+  7 with real photos (only VP Education and VP Operations remain
+  initials-only).
+- **Getting Started, step 1** header reworded from "Check the details, then
+  just show up" to "Check the details, then let us know you are coming."
+- **New "RSVP" link.** A small "RSVP →" link now sits under the step 2 header
+  ("Sit in and see the format"), jumping straight down to the "RSVP Now"
+  button in the closing section at the bottom of the page.
 
 ## Updating the live GitHub Pages site
 
@@ -59,7 +54,7 @@ existing repo rather than starting a new one:
 2. From the repo folder:
    ```bash
    git add -A
-   git commit -m "VP Membership update, calendar CTA, email copy buttons"
+   git commit -m "Doni K. photo, RSVP wording and jump-link"
    git push
    ```
 3. GitHub Pages rebuilds automatically after the push — give it a minute or
@@ -100,19 +95,19 @@ beyond pointing the host at `index.html`.
   Foursquare Church, 400 N 105th St, Seattle, WA 98133) — cross-check against
   the official Toastmasters "Find a Club" listing:
   <https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club>
-- **Officer photos** — 4 of 7 officers (President, Treasurer, VP Innovation,
-  VP Public Relations) have real photos; VP Education and VP Operations still
-  show initials-only avatars, and Doni K. (VP Membership) doesn't have one
-  yet either. Search `index.html` for `officer-avatar` to find them.
+- **Officer photos** — 5 of 7 officers (President, Treasurer, VP Innovation,
+  VP Public Relations, VP Membership) have real photos; VP Education and VP
+  Operations still show initials-only avatars. Search `index.html` for
+  `officer-avatar` to find them.
 - **Event dates** — the Speech Contest Season spotlight tile has a real
   photo, but it (and the matching entry in the Events calendar) still need a
   real, confirmed contest date.
 - **Media Kit** — the Media Kit card currently states a release timeline
   (early Fall 2026); the PDF itself doesn't exist yet and isn't linked.
-- **Virtual meeting option** — since the meeting-card button now points to
-  the calendar instead of Google Meet, confirm whether the virtual option
-  should be linked somewhere else on the page, or whether it's intentionally
-  gone now that meetings are 100% in-person.
+- **Virtual meeting option** — since the meeting-card button points to the
+  calendar instead of Google Meet, confirm whether the virtual option should
+  be linked somewhere else on the page, or whether it's intentionally gone
+  now that meetings are 100% in-person.
 
 ## Security notes
 
@@ -127,9 +122,9 @@ beyond pointing the host at `index.html`.
   deciding on deliberately rather than doing by default.
 - All external links use `rel="noopener noreferrer"`, and the club video
   embed uses YouTube's privacy-enhanced `youtube-nocookie.com` domain.
-- The "Copy Emails Instead" buttons use the Clipboard API only when the page
-  is in a secure context (`window.isSecureContext`) — GitHub Pages serves
-  over HTTPS, so this will be true on the live site.
+- The "Copy Emails Instead" buttons use a three-step fallback (modern
+  Clipboard API → legacy `execCommand` → a manual copy prompt), so they work
+  even in browsers or preview panes that block the newer clipboard API.
 - If you add a new external resource later (a new font host, embed, or
   image origin), the CSP meta tag's directives will need a matching update
   or the browser will silently block it.
