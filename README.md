@@ -4,8 +4,9 @@ A single-page static site. No build step, no framework, no dependencies beyond
 two Google Fonts loaded via `<link>` tags in `index.html`. Open `index.html`
 in a browser and it works as-is.
 
-This export reflects everything through **Batch 40**, including Doni K.'s
-officer photo, the reworded RSVP-focused Getting Started copy, and the earlier
+This export reflects everything through **Batch 43**, including real photos
+for all 7 officers, corrected guest-attendance wording, a December 14th
+Members Only calendar date, a mobile calendar-centering fix, and the earlier
 venue change, calendar overhaul, copy-to-clipboard fallback fix, and security
 hardening pass (Content-Security-Policy, hardened external links, hardened
 YouTube embed). It updates the site already live at
@@ -21,8 +22,9 @@ YouTube embed). It updates the site already live at
 - `assets/img/` — every photo and the club logo, as real image files
   (embedded inline in the working draft; extracted here so the browser can
   cache them separately and the HTML stays small). Same file names/paths as
-  the previous export, plus one new file: `assets/img/officers/vp-membership.jpg`
-  (Doni K.'s new headshot).
+  the previous export, plus two new files: `assets/img/officers/vp-education.jpg`
+  (Lisa H.) and `assets/img/officers/vp-operations.jpg` (Rick R.) — the last
+  two officer photos, completing the full roster.
 
 This replaces the earlier multi-page draft (`index.html` / `about.html` /
 `spotlights.html` / `events.html` / `getting-started.html` + `css/style.css`)
@@ -32,15 +34,19 @@ refined ever since.
 
 ## What's new in this export since the last one
 
-- **Doni K.'s officer photo.** VP Membership now has a real, face-centered
-  photo in place of the initials-only avatar — the officer roster is now 5 of
-  7 with real photos (only VP Education and VP Operations remain
-  initials-only).
-- **Getting Started, step 1** header reworded from "Check the details, then
-  just show up" to "Check the details, then let us know you are coming."
-- **New "RSVP" link.** A small "RSVP →" link now sits under the step 2 header
-  ("Sit in and see the format"), jumping straight down to the "RSVP Now"
-  button in the closing section at the bottom of the page.
+- **Lisa H.'s and Rick R.'s officer photos.** Both now have real,
+  face-centered photos in place of their initials-only avatars — **the
+  officer roster is now complete: all 7 of 7 have real photos.**
+- **Guest-attendance wording corrected.** The homepage intro and the Weekly
+  Club Meeting listing both previously implied guests could join every single
+  week; both now say guests are welcome "most weeks" and point visitors to
+  the calendar, since some Mondays are Members Only or cancelled.
+- **December 14, 2026** is now marked Members Only on the Events calendar.
+- **Club News tile** now reads "Thank You, Fairview Church!" (was "Thank You
+  Fairview Church").
+- **Mobile calendar fix.** "Members Only" tags (which wrap onto two lines on
+  narrow screens) now center correctly instead of appearing left-aligned.
+- **"Growing Fast"** card retitled **"Growing Quickly."**
 
 ## Updating the live GitHub Pages site
 
@@ -54,7 +60,7 @@ existing repo rather than starting a new one:
 2. From the repo folder:
    ```bash
    git add -A
-   git commit -m "Doni K. photo, RSVP wording and jump-link"
+   git commit -m "Complete officer photos, guest-wording fix, calendar updates"
    git push
    ```
 3. GitHub Pages rebuilds automatically after the push — give it a minute or
@@ -95,10 +101,8 @@ beyond pointing the host at `index.html`.
   Foursquare Church, 400 N 105th St, Seattle, WA 98133) — cross-check against
   the official Toastmasters "Find a Club" listing:
   <https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club>
-- **Officer photos** — 5 of 7 officers (President, Treasurer, VP Innovation,
-  VP Public Relations, VP Membership) have real photos; VP Education and VP
-  Operations still show initials-only avatars. Search `index.html` for
-  `officer-avatar` to find them.
+- **Officer photos** — all 7 officers now have real photos. Search
+  `index.html` for `officer-avatar` if you ever need to swap one out.
 - **Event dates** — the Speech Contest Season spotlight tile has a real
   photo, but it (and the matching entry in the Events calendar) still need a
   real, confirmed contest date.
