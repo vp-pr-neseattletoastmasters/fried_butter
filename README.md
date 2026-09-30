@@ -4,13 +4,12 @@ A single-page static site. No build step, no framework, no dependencies beyond
 two Google Fonts loaded via `<link>` tags in `index.html`. Open `index.html`
 in a browser and it works as-is.
 
-This export reflects everything through **Batch 43**, including real photos
-for all 7 officers, corrected guest-attendance wording, a December 14th
-Members Only calendar date, a mobile calendar-centering fix, and the earlier
-venue change, calendar overhaul, copy-to-clipboard fallback fix, and security
-hardening pass (Content-Security-Policy, hardened external links, hardened
-YouTube embed). It updates the site already live at
-**www.neseattletoastmasters.org**.
+This export reflects everything through **Batch 52**, including the club's
+first meeting at its new venue, a reorganized Getting Started process, a new
+Member Spotlights tile, and the earlier complete officer-photo roster,
+corrected guest-attendance wording, calendar updates, and security hardening
+pass (Content-Security-Policy, hardened external links, hardened YouTube
+embed). It updates the site already live at **www.neseattletoastmasters.org**.
 
 ## What's in this export
 
@@ -22,9 +21,10 @@ YouTube embed). It updates the site already live at
 - `assets/img/` — every photo and the club logo, as real image files
   (embedded inline in the working draft; extracted here so the browser can
   cache them separately and the HTML stays small). Same file names/paths as
-  the previous export, plus two new files: `assets/img/officers/vp-education.jpg`
-  (Lisa H.) and `assets/img/officers/vp-operations.jpg` (Rick R.) — the last
-  two officer photos, completing the full roster.
+  the previous export, plus two new files: `assets/img/club-news/inaugural-meeting.jpg`
+  (the club's first meeting at its new venue) and
+  `assets/img/spotlights/dallas-license-plate-improv.jpg` (Dallas H.'s new
+  Member Spotlights tile).
 
 This replaces the earlier multi-page draft (`index.html` / `about.html` /
 `spotlights.html` / `events.html` / `getting-started.html` + `css/style.css`)
@@ -34,19 +34,25 @@ refined ever since.
 
 ## What's new in this export since the last one
 
-- **Lisa H.'s and Rick R.'s officer photos.** Both now have real,
-  face-centered photos in place of their initials-only avatars — **the
-  officer roster is now complete: all 7 of 7 have real photos.**
-- **Guest-attendance wording corrected.** The homepage intro and the Weekly
-  Club Meeting listing both previously implied guests could join every single
-  week; both now say guests are welcome "most weeks" and point visitors to
-  the calendar, since some Mondays are Members Only or cancelled.
-- **December 14, 2026** is now marked Members Only on the Events calendar.
-- **Club News tile** now reads "Thank You, Fairview Church!" (was "Thank You
-  Fairview Church").
-- **Mobile calendar fix.** "Members Only" tags (which wrap onto two lines on
-  narrow screens) now center correctly instead of appearing left-aligned.
-- **"Growing Fast"** card retitled **"Growing Quickly."**
+- **New Club News lead card, "The Next Era Has Begun."** A photo from the
+  club's first meeting at the Seattle Foursquare Church, with the body text
+  "On September 28, NE Seattle Toastmasters hosted its first meeting at the
+  Seattle Foursquare Church, featuring fabulous speakers, stage lights, and
+  seating for showtime!"
+- **New Member Spotlights tile, "Dallas H." / "License Plate Improv,"** now
+  leading that section's grid.
+- **Speech Contest Season** moved to the end of the Spotlights grid and now
+  centers itself automatically whenever it's the lone tile in the final row
+  (a CSS rule handles this generically, so it'll keep working if tiles are
+  added or removed later) — the grid's empty space also now matches the page's
+  dark background instead of showing as a pale grey block.
+- **Getting Started reorganized:** a new "RSVP" step was added (now step 2:
+  "Let us know you're coming"), the "Meeting Roles & What to Expect" guide
+  link moved to the "Sit in and see the format" step, step 1 was retitled to
+  "Get the location details," and the bottom "RSVP Now" button now reads
+  "RSVP Now (Opens Your Email App)" for clarity.
+- **Closing CTA band** headline now reads "See you Monday at 7:30 pm!" (was
+  "7:30!").
 
 ## Updating the live GitHub Pages site
 
@@ -60,7 +66,7 @@ existing repo rather than starting a new one:
 2. From the repo folder:
    ```bash
    git add -A
-   git commit -m "Complete officer photos, guest-wording fix, calendar updates"
+   git commit -m "New Club News and Spotlights content, Getting Started reorg"
    git push
    ```
 3. GitHub Pages rebuilds automatically after the push — give it a minute or
@@ -101,8 +107,8 @@ beyond pointing the host at `index.html`.
   Foursquare Church, 400 N 105th St, Seattle, WA 98133) — cross-check against
   the official Toastmasters "Find a Club" listing:
   <https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club>
-- **Officer photos** — all 7 officers now have real photos. Search
-  `index.html` for `officer-avatar` if you ever need to swap one out.
+- **Officer photos** — all 7 officers have real photos. Search `index.html`
+  for `officer-avatar` if you ever need to swap one out.
 - **Event dates** — the Speech Contest Season spotlight tile has a real
   photo, but it (and the matching entry in the Events calendar) still need a
   real, confirmed contest date.
@@ -112,6 +118,9 @@ beyond pointing the host at `index.html`.
   calendar instead of Google Meet, confirm whether the virtual option should
   be linked somewhere else on the page, or whether it's intentionally gone
   now that meetings are 100% in-person.
+- **Spotlights grid balance** — the grid currently has 7 tiles; if you'd
+  rather not have any tile sit alone in the final row (even centered), adding
+  an 8th (or a 9th) tile would fill that row out completely.
 
 ## Security notes
 
