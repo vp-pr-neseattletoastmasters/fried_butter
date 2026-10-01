@@ -4,12 +4,14 @@ A single-page static site. No build step, no framework, no dependencies beyond
 two Google Fonts loaded via `<link>` tags in `index.html`. Open `index.html`
 in a browser and it works as-is.
 
-This export reflects everything through **Batch 52**, including the club's
-first meeting at its new venue, a reorganized Getting Started process, a new
-Member Spotlights tile, and the earlier complete officer-photo roster,
-corrected guest-attendance wording, calendar updates, and security hardening
-pass (Content-Security-Policy, hardened external links, hardened YouTube
-embed). It updates the site already live at **www.neseattletoastmasters.org**.
+This export reflects everything through **Batch 53**, including a new "how
+to find us" video link and a clearer directions link label in Getting
+Started, the club's first meeting at its new venue, a reorganized Getting
+Started process, a new Member Spotlights tile, and the earlier complete
+officer-photo roster, corrected guest-attendance wording, calendar updates,
+and security hardening pass (Content-Security-Policy, hardened external
+links, hardened YouTube embed). It updates the site already live at
+**www.neseattletoastmasters.org**.
 
 ## What's in this export
 
@@ -21,10 +23,7 @@ embed). It updates the site already live at **www.neseattletoastmasters.org**.
 - `assets/img/` — every photo and the club logo, as real image files
   (embedded inline in the working draft; extracted here so the browser can
   cache them separately and the HTML stays small). Same file names/paths as
-  the previous export, plus two new files: `assets/img/club-news/inaugural-meeting.jpg`
-  (the club's first meeting at its new venue) and
-  `assets/img/spotlights/dallas-license-plate-improv.jpg` (Dallas H.'s new
-  Member Spotlights tile).
+  the previous export — no new images were added in Batch 53.
 
 This replaces the earlier multi-page draft (`index.html` / `about.html` /
 `spotlights.html` / `events.html` / `getting-started.html` + `css/style.css`)
@@ -33,6 +32,16 @@ on in favor of the single scrolling page you have here, which is what's been
 refined ever since.
 
 ## What's new in this export since the last one
+
+- **Getting Started, step 1 ("Get the location details"):** added a new
+  link, "Watch the video for how to find us (YouTube)," pointing to a
+  short walkthrough video, placed under the existing directions text. The
+  existing "follow these directions" link was relabeled "follow these
+  directions (PDF)" for clarity. Both links use
+  `target="_blank" rel="noopener noreferrer"` to match the site's existing
+  external-link hardening.
+
+## Earlier changes (previous export)
 
 - **New Club News lead card, "The Next Era Has Begun."** A photo from the
   club's first meeting at the Seattle Foursquare Church, with the body text
@@ -66,7 +75,7 @@ existing repo rather than starting a new one:
 2. From the repo folder:
    ```bash
    git add -A
-   git commit -m "New Club News and Spotlights content, Getting Started reorg"
+   git commit -m "Getting Started: new how-to-find-us video link, directions link labeled (PDF)"
    git push
    ```
 3. GitHub Pages rebuilds automatically after the push — give it a minute or
