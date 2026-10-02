@@ -1,162 +1,65 @@
-# Northeast Seattle Toastmasters — Club 1161 Website
+# Northeast Seattle Toastmasters (Club 1161) — Website Export
 
-A single-page static site. No build step, no framework, no dependencies beyond
-two Google Fonts loaded via `<link>` tags in `index.html`. Open `index.html`
-in a browser and it works as-is.
+This is a hosting-ready export of the Club 1161 website: a single `index.html` with real image files under `assets/img/`, built from the live working draft (`live-preview.html`) that London and Claude iterate on in chat.
 
-This export reflects everything through **Batch 53**, including a new "how
-to find us" video link and a clearer directions link label in Getting
-Started, the club's first meeting at its new venue, a reorganized Getting
-Started process, a new Member Spotlights tile, and the earlier complete
-officer-photo roster, corrected guest-attendance wording, calendar updates,
-and security hardening pass (Content-Security-Policy, hardened external
-links, hardened YouTube embed). It updates the site already live at
-**www.neseattletoastmasters.org**.
+## What's new in this export since the last one (Batch 55, 2026-10-02)
 
-## What's in this export
+This export reflects every batch through **Batch 55** — the last export (delivered 2026-10-01) only reflected through Batch 53. New since then:
 
-- `index.html` — the entire site (one scrolling page with anchor-linked
-  sections: Home, Innovation, Member Projects, About & Officers, Awards,
-  Spotlights, Club News, Events, Getting Started). The header nav and footer
-  link to sections on this same page (`#about`, `#spotlights`, etc.), not to
-  separate pages.
-- `assets/img/` — every photo and the club logo, as real image files
-  (embedded inline in the working draft; extracted here so the browser can
-  cache them separately and the HTML stays small). Same file names/paths as
-  the previous export — no new images were added in Batch 53.
+- **Ignite Seattle 52 outing (Batch 54).** Two new pieces of content from the club's October 1 trip to Ignite Seattle 52 at Seattle Town Hall:
+  - A new Member Spotlights tile, **"Ignite Seattle 52"** (eyebrow "Extracurricular Opportunities"), using a group photo from the event.
+  - A new Club News card, **"Our Night at Ignite"** (eyebrow "Extracurricular Activities"), using a photo of club members on stage, with London's full writeup about the evening.
+- **Stage photo leveled and centered (Batch 55).** The "Our Night at Ignite" photo had a ~1.3° tilt in the projector screen behind the speakers — straightened and re-cropped so the screen reads level and centered.
+- **Spotlights reorder (Batch 55).** The "Ignite Seattle 52" tile now leads the Spotlights grid instead of trailing it (pure reorder, no other tiles changed).
 
-This replaces the earlier multi-page draft (`index.html` / `about.html` /
-`spotlights.html` / `events.html` / `getting-started.html` + `css/style.css`)
-from the very first pass at this project — that structure was abandoned early
-on in favor of the single scrolling page you have here, which is what's been
-refined ever since.
+### Earlier changes (previous export, Batch 53)
+- Getting Started step 1 gained a "Watch the video for how to find us (YouTube)" link, and the existing directions link was relabeled "follow these directions (PDF)" so visitors know it opens a PDF.
 
-## What's new in this export since the last one
+### Earlier changes still (Batch 52 export and before)
+Getting Started was restructured into an 8-step process with a dedicated RSVP step; new Club News card "The Next Era Has Begun" (first meeting at the new venue); new Spotlights tile for Dallas H. ("License Plate Improv"); Speech Contest Season tile reordered to the end and centered in its row; the Spotlights grid's empty final-row space now matches the page background instead of showing as a grey block; closing CTA band reworded to "See you Monday at 7:30 pm!". See the project status doc for the full batch-by-batch history.
 
-- **Getting Started, step 1 ("Get the location details"):** added a new
-  link, "Watch the video for how to find us (YouTube)," pointing to a
-  short walkthrough video, placed under the existing directions text. The
-  existing "follow these directions" link was relabeled "follow these
-  directions (PDF)" for clarity. Both links use
-  `target="_blank" rel="noopener noreferrer"` to match the site's existing
-  external-link hardening.
+## New image assets in this export
 
-## Earlier changes (previous export)
+Two new images were added (both from the Ignite Seattle 52 outing):
+- `assets/img/spotlights/ignite-seattle-52.jpg`
+- `assets/img/club-news/our-night-at-ignite.jpg` (this is the leveled/recentered version, not the original tilted photo)
 
-- **New Club News lead card, "The Next Era Has Begun."** A photo from the
-  club's first meeting at the Seattle Foursquare Church, with the body text
-  "On September 28, NE Seattle Toastmasters hosted its first meeting at the
-  Seattle Foursquare Church, featuring fabulous speakers, stage lights, and
-  seating for showtime!"
-- **New Member Spotlights tile, "Dallas H." / "License Plate Improv,"** now
-  leading that section's grid.
-- **Speech Contest Season** moved to the end of the Spotlights grid and now
-  centers itself automatically whenever it's the lone tile in the final row
-  (a CSS rule handles this generically, so it'll keep working if tiles are
-  added or removed later) — the grid's empty space also now matches the page's
-  dark background instead of showing as a pale grey block.
-- **Getting Started reorganized:** a new "RSVP" step was added (now step 2:
-  "Let us know you're coming"), the "Meeting Roles & What to Expect" guide
-  link moved to the "Sit in and see the format" step, step 1 was retitled to
-  "Get the location details," and the bottom "RSVP Now" button now reads
-  "RSVP Now (Opens Your Email App)" for clarity.
-- **Closing CTA band** headline now reads "See you Monday at 7:30 pm!" (was
-  "7:30!").
+Every other image in this export is unchanged from the Batch 53 export, just re-extracted and re-saved under the same naming convention (no previous export's asset files were available locally to hash-match byte-for-byte against this time, so all 23 images were re-extracted fresh from the current `live-preview.html` — this does not change any image's content, only regenerates the files).
 
 ## Updating the live GitHub Pages site
 
-Since the site is already deployed, this export replaces the files in your
-existing repo rather than starting a new one:
+The site is already live at **www.neseattletoastmasters.org**, deployed from the GitHub repo `vp-pr-neseattletoastmasters.github.io` with a Squarespace-managed custom domain. To push this update:
 
-1. In your local clone of the `vp-pr-neseattletoastmasters.github.io` repo,
-   delete the old `index.html` and `assets/` folder and copy in this export's
-   `index.html` and `assets/` folder (do not touch your `CNAME` file, if you
-   have one, or any GitHub Pages settings — those stay as they are).
-2. From the repo folder:
-   ```bash
-   git add -A
-   git commit -m "Getting Started: new how-to-find-us video link, directions link labeled (PDF)"
+1. Clone (or open your local copy of) `vp-pr-neseattletoastmasters.github.io`.
+2. Replace the repo's `index.html` and `assets/` folder with the ones in this export.
+3. Commit and push to the branch GitHub Pages serves from (usually `main`):
+   ```
+   git add index.html assets
+   git commit -m "Add Ignite Seattle 52 content (Batches 54-55)"
    git push
    ```
-3. GitHub Pages rebuilds automatically after the push — give it a minute or
-   two, then reload **www.neseattletoastmasters.org** (a hard refresh /
-   private window helps if you still see the old version, since browsers
-   cache static sites aggressively).
+4. GitHub Pages will rebuild automatically — changes are usually live within a minute or two. No DNS or Squarespace changes are needed; the custom domain is already wired up.
 
-## Deploying from scratch (first-time reference)
+## Before this goes live — things worth double-checking
+- **Speech Contest Season** tile still needs a real, confirmed contest date (on both the Spotlights tile and the Events list) — it's been using a placeholder-free real photo since Batch 32, but no date yet.
+- **Google Meet virtual-meeting link** (`https://meet.google.com/tef-kmyi-xxb`) no longer appears anywhere on the page since Batch 36 repointed its button to the Events calendar — confirm with London whether the virtual option should get a new home on the page, or whether it's genuinely gone.
+- **Residual security gap:** click-jacking protection (`X-Frame-Options` / CSP `frame-ancestors`) can't be added on GitHub Pages as configured today — that needs a real HTTP response header, which this static host can't send. Putting a service like Cloudflare in front of the domain would close this gap, but that's a hosting/DNS change that shouldn't happen without asking first.
+- Media Kit PDF doesn't exist yet as a linked file on the site (draft tracked separately).
 
-1. Create a new **public** repo on GitHub (e.g. `ne-seattle-toastmasters`).
-2. From this folder:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial site build"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git push -u origin main
-   ```
-3. On GitHub: **Settings → Pages → Build and deployment → Source: Deploy from
-   a branch → Branch: `main` / root**. Save.
-4. Your site will be live at `https://<your-username>.github.io/<repo-name>/`
-   within a minute or two.
-5. Optional: add a custom domain under **Settings → Pages → Custom domain**
-   (requires a `CNAME` file at the repo root, which GitHub will create for you).
+## Security notes (carried forward from Batch 31)
+- A `Content-Security-Policy` meta tag and a `referrer` meta tag are in the `<head>` — this is the strongest lever available on a static host like GitHub Pages, since it can't send custom HTTP response headers. If a future edit adds a new external resource (a new font host, embed, or image origin), the matching CSP directive will need updating or the browser will silently block it.
+- All external links use `rel="noopener noreferrer"`.
+- The YouTube embed goes through `youtube-nocookie.com` with a trimmed permissions list.
+- The "Copy Emails Instead" buttons use a three-step fallback (Clipboard API → `execCommand` → `window.prompt`) since `window.isSecureContext` reliance alone wasn't working for everyone — GitHub Pages's HTTPS satisfies the modern path, so this is mostly a safety net.
 
-## Deploying anywhere else
-
-This is a plain static site, so any static host works the same way — drag
-the whole folder into Netlify, Vercel, Cloudflare Pages, or an S3 bucket with
-static-website hosting turned on. There's nothing to build or configure
-beyond pointing the host at `index.html`.
-
-## Before this goes live
-
-- **Verify meeting details against Club Central** — day/time, location, and
-  format (currently: Mondays, 7:30–9:00 PM, 100% in-person, Seattle
-  Foursquare Church, 400 N 105th St, Seattle, WA 98133) — cross-check against
-  the official Toastmasters "Find a Club" listing:
-  <https://www.toastmasters.org/Find-a-Club/00001161-northeast-toastmasters-club>
-- **Officer photos** — all 7 officers have real photos. Search `index.html`
-  for `officer-avatar` if you ever need to swap one out.
-- **Event dates** — the Speech Contest Season spotlight tile has a real
-  photo, but it (and the matching entry in the Events calendar) still need a
-  real, confirmed contest date.
-- **Media Kit** — the Media Kit card currently states a release timeline
-  (early Fall 2026); the PDF itself doesn't exist yet and isn't linked.
-- **Virtual meeting option** — since the meeting-card button points to the
-  calendar instead of Google Meet, confirm whether the virtual option should
-  be linked somewhere else on the page, or whether it's intentionally gone
-  now that meetings are 100% in-person.
-- **Spotlights grid balance** — the grid currently has 7 tiles; if you'd
-  rather not have any tile sit alone in the final row (even centered), adding
-  an 8th (or a 9th) tile would fill that row out completely.
-
-## Security notes
-
-- `index.html` includes a Content-Security-Policy meta tag restricting
-  scripts, styles, fonts, images, and frames to the specific origins the
-  page actually uses, plus a `referrer` meta tag. GitHub Pages serves static
-  files only and can't send custom HTTP response headers, so this meta tag
-  is the strongest lever available on this host — it cannot cover
-  click-jacking protection (`frame-ancestors`), which requires a real HTTP
-  header. If that matters, putting a service like Cloudflare in front of the
-  domain would allow adding it, but that's a hosting/DNS change worth
-  deciding on deliberately rather than doing by default.
-- All external links use `rel="noopener noreferrer"`, and the club video
-  embed uses YouTube's privacy-enhanced `youtube-nocookie.com` domain.
-- The "Copy Emails Instead" buttons use a three-step fallback (modern
-  Clipboard API → legacy `execCommand` → a manual copy prompt), so they work
-  even in browsers or preview panes that block the newer clipboard API.
-- If you add a new external resource later (a new font host, embed, or
-  image origin), the CSP meta tag's directives will need a matching update
-  or the browser will silently block it.
-
-## Toastmasters branding note
-
-This site avoids using the official Toastmasters International logo file
-in any way not sanctioned by the Brand Portal, and doesn't use a
-club-created logo or tagline (not permitted per the Brand Manual). Copy
-uses the manual's approved marketing phrases verbatim ("Find Your Voice",
-"Find Your Confidence"). The footer includes the mandatory Website
-Guidelines disclaimer. Confirm current brand-portal compliance before
-publishing if the Brand Manual has been updated since this was built.
+## Verification performed on this export
+Checked with a headless browser against the exported files directly (not the chat preview):
+- Zero JS errors; zero unexpected console messages beyond the sandbox's own network-blocked YouTube/font requests (both resolve fine on the real, deployed domain).
+- Zero leftover `data:` image URIs — all 23 images are real files under `assets/img/`.
+- Zero 4xx/5xx responses for any local resource, including the favicon (this only resolves in a real export, not the bare chat-preview fragment).
+- All 9 `<img>` tags load with a valid `naturalWidth` (the one exception, the click-to-play YouTube thumbnail, is blocked by this sandbox's network only — confirmed working on the live domain previously).
+- Spotlights grid: 8 tiles in the correct order, led by "Ignite Seattle 52."
+- Club News carousel: 7 cards in the correct order, led by "Our Night at Ignite" with the corrected, leveled photo.
+- All 7 officer cards render with the correct name/role and a real photo.
+- Getting Started step 1 has both links with correct labels, hrefs, and hardening attributes.
+- Closing CTA band reads "See you Monday at 7:30 pm!"
