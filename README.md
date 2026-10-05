@@ -2,13 +2,16 @@
 
 This is a hosting-ready export of the Club 1161 website: a single `index.html` with real image files under `assets/img/`, built from the live working draft (`live-preview.html`) that London and Claude iterate on in chat.
 
-## What's new in this export since the last one (Batch 57, 2026-10-05)
+## What's new in this export since the last one (Batch 58, 2026-10-05)
 
-This export reflects every batch through **Batch 57** — the last export (delivered earlier on 2026-10-05) reflected through Batch 56. New since then (a one-line data change; no new images):
+This export reflects every batch through **Batch 58** — the last export (delivered earlier on 2026-10-05) reflected through Batch 57. New since then (no new images):
 
-- **October 5, 2026 meeting marked Cancelled (Batch 57).** The Events calendar now shows Oct 5 with a struck-through date and a "Cancelled" label. Oct 12, 19, and 26 are unchanged (In-person).
+- **Announcement banner (Batch 58).** A maroon banner slides down above the site header reading "Meeting cancelled: Monday, October 5. We hope to see you next Monday, October 12 at 7:30 pm." with a "See the calendar" link (jumps to the Events calendar) and a close (×) button. Visitors can dismiss it; it comes back on reload. **It retires itself automatically on October 6, 2026** (a date check in the small inline script right after the banner), so it can't go stale — no cleanup push is required, though the banner markup/CSS can be deleted from `index.html` at any time (search for `notice-banner`). To reuse it for a future announcement, edit the text and the date in that script.
 
-### Earlier changes (previous export, Batch 56)
+### Earlier changes (previous export, Batch 57)
+- **October 5, 2026 meeting marked Cancelled (Batch 57).** The Events calendar shows Oct 5 with a struck-through date and a "Cancelled" label.
+
+### Earlier changes (Batch 56 export)
 - **Media Kit linked (Batch 56).** The Events-section Media Kit card reads "Download the Club 1161 Media Kit now." (a link), and the footer's Connect column has a "Media Kit (PDF)" link. Both point to the Google Drive PDF (`https://drive.google.com/file/d/17WqIu-T-X9hP5W6fJYnB5mm1vVzEBcut/view?usp=sharing`).
 
 ### Earlier changes (Batches 54-55 export)
@@ -34,7 +37,7 @@ The site is already live at **www.neseattletoastmasters.org**, deployed from the
 3. Commit and push to the branch GitHub Pages serves from (usually `main`):
    ```
    git add index.html assets
-   git commit -m "Mark Oct 5 meeting cancelled on calendar (Batch 57)"
+   git commit -m "Add Oct 5 cancellation banner (Batch 58)"
    git push
    ```
 4. GitHub Pages will rebuild automatically — changes are usually live within a minute or two. No DNS or Squarespace changes are needed; the custom domain is already wired up.
@@ -57,6 +60,7 @@ Checked with a headless browser against the exported files directly (not the cha
 - Zero leftover `data:` image URIs — all 23 images are real files under `assets/img/`.
 - Zero 4xx/5xx responses for any local resource, including the favicon (this only resolves in a real export, not the bare chat-preview fragment).
 - All 9 `<img>` tags load with a valid `naturalWidth` (the one exception, the click-to-play YouTube thumbnail, is blocked by this sandbox's network only — confirmed working on the live domain previously).
+- Announcement banner: present above the header, text matches exactly, "See the calendar" scrolls to the calendar, × dismisses it, and it is hidden when the date is October 6, 2026 or later; no horizontal overflow at 375px.
 - Calendar: October 2026 shows Oct 5 as Cancelled (struck-through, maroon label) and Oct 12/19/26 as In-person.
 - Media Kit: footer "Media Kit (PDF)" link and Events card "Download the Club 1161 Media Kit now." link both point to the Drive URL, open in a new tab, and carry `rel="noopener noreferrer"`; the old "early Fall 2026" text is gone.
 - Spotlights grid: 8 tiles in the correct order, led by "Ignite Seattle 52."
